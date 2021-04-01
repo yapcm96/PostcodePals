@@ -40,3 +40,18 @@ def view_tasks(request):
         )
         task.save()
         return HttpResponse(status=201)
+
+    elif request.method == 'PUT':
+        request_body = json.loads(request.body)
+        required_task = Task.objects.get(id=request_body["id"])
+        required_task.task=request_body['task']
+        required_task.type_of_task = request_body['type_of_task']
+        required_task.location = request_body['location']
+        required_task.estimated_duration_mins = request_body['estimated_duration_mins']
+        required_task.deadline = request_body['deadline']
+        required_task.notes = request_body['notes']
+        required_task.status = request_body['status']
+        required_task.task_setter = request_body['task_setter']
+        required_task.save()
+        return HttpResponse(status=200)
+        print(required_task)
