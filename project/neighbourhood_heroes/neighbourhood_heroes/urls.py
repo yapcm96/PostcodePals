@@ -18,6 +18,7 @@ from django.urls import path, include
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('pages.urls'))
+    path('admin/', admin.site.urls), # Admin URL
+    path('', include('pages.urls')), # Root URL
+    path('api-auth/', include('rest_framework.urls')), # To use browser API
 ]
