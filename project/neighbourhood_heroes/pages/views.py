@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, HttpRequest
+import json
 
 from .models import Task
 
@@ -24,3 +25,18 @@ def view_tasks(request):
         ]
 
         return JsonResponse(tasks, safe = False)
+
+    elif request.method == 'POST':
+        request_body = json.loads(request.body)
+        task = Task(
+            task = request_body['task'],
+            type_of_task = request_body['type_of_task'],
+            location = request_body['location'],
+            estimated_duration_mins = request_body['estimated_duration_mins'],
+            deadline = request_body['deadline'],
+            notes = request_body['notes'],
+            status = request_body['status'],
+            task_setter = request_body['task_setter'],
+        )
+        task.save()
+        return HttpResponse(status=201)
