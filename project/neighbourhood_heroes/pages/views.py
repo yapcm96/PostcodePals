@@ -83,4 +83,14 @@ def task_completer_select_view(request, id):
 
         object_to_select.save()
         return HttpResponse(status=200)
+
+def task_completer_complete_view(request, id):
+    if request.method == "PUT":
+        object_to_select = get_object_or_404(Task, id=id)
+
+        request_body = json.loads(request.body)
+        object_to_select.status = request_body['status']
+
+        object_to_select.save()
+        return HttpResponse(status=200)
         
