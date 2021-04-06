@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, JsonResponse, HttpRequest
 import json
 
@@ -55,3 +55,9 @@ def view_tasks(request):
         required_task.save()
         return HttpResponse(status=200)
         print(required_task)
+
+# view for updating specific task
+def update_task_view(request, id):
+    object_to_update = get_object_or_404(Task, id=id)
+    print(object_to_update)
+    return HttpResponse(status=200)
