@@ -74,7 +74,15 @@ class TaskUpdate(UpdateView):
 
     success_url = '/'
     
+# view for updating the status of a task
+class StatusUpdate(UpdateView):
+    model = Task
+    template_name = 'placeholder_form_template.html'
+    fields = ['status']
 
+    success_url = '/'
+
+    
 def task_completer_select_view(request, id):
     if request.method == "PUT":
         return verify_updating_status(request, id, 'In Progress')
