@@ -81,16 +81,5 @@ class StatusUpdate(UpdateView):
     fields = ['status']
 
     success_url = '/'
-
-    
-def task_completer_select_view(request, id):
-    if request.method == "PUT":
-        return verify_updating_status(request, id, 'In Progress')
-
-        
-
-def task_completer_complete_view(request, id):
-    if request.method == "PUT":
-       return verify_updating_status(request, id, 'Completed')
         
         
