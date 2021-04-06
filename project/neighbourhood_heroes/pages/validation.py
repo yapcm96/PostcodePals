@@ -4,7 +4,7 @@ import json
 
 from .models import Task
 
-def verify_updating_status(request, id, str):
+def validate_updating_status(request, id, str):
     object_to_update = get_object_or_404(Task, id=id)
 
     request_body = json.loads(request.body)

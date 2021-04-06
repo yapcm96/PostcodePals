@@ -2,7 +2,6 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, JsonResponse, HttpRequest
 import json
 from django.views.generic.edit import UpdateView
-from .verification import verify_updating_status
 from .models import Task
 
 # Create your views here.
