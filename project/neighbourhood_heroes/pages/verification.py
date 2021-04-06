@@ -5,12 +5,12 @@ import json
 from .models import Task
 
 def verify_updating_status(request, id, str):
-    object_to_select = get_object_or_404(Task, id=id)
+    object_to_update = get_object_or_404(Task, id=id)
 
     request_body = json.loads(request.body)
     if request_body['status'] == str:
-        object_to_select.status = request_body['status']
-        object_to_select.save()
+        object_to_update.status = request_body['status']
+        object_to_update.save()
         return HttpResponse(status=200)
     else:
         return HttpResponse(status=400)
