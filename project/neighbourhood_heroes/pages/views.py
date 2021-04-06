@@ -74,23 +74,6 @@ class TaskUpdate(UpdateView):
 
     success_url = '/'
     
-    
-def update_task_view(request, id):
-    if request.method == 'PUT':
-        object_to_update = get_object_or_404(Task, id=id)
-        
-        request_body = json.loads(request.body)
-        object_to_update.task=request_body['task']
-        object_to_update.type_of_task = request_body['type_of_task']
-        object_to_update.location = request_body['location']
-        object_to_update.estimated_duration_mins = request_body['estimated_duration_mins']
-        object_to_update.deadline = request_body['deadline']
-        object_to_update.notes = request_body['notes']
-        object_to_update.status = request_body['status']
-        object_to_update.task_setter = request_body['task_setter']
-
-        object_to_update.save()
-        return HttpResponse(status=200)
 
 def task_completer_select_view(request, id):
     if request.method == "PUT":
