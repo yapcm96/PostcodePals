@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, JsonResponse, HttpRequest
 import json
+from django.views.generic.edit import UpdateView
 from .verification import verify_updating_status
 from .models import Task
 
@@ -57,6 +58,23 @@ def view_tasks(request):
         print(required_task)
 
 # view for updating specific task by tasks setter
+class TaskUpdate(UpdateView):
+    model = Task
+    template_name = 'placeholder_form_template.html'
+    fields = [
+        'task',
+        'type_of_task',
+        'location',
+        'estimated_duration_mins',
+        'deadline',
+        'notes',
+        'status',
+        'task_setter'
+        ]
+
+    success_url = '/'
+    
+    
 def update_task_view(request, id):
     if request.method == 'PUT':
         object_to_update = get_object_or_404(Task, id=id)

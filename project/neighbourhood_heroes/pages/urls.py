@@ -7,4 +7,5 @@ urlpatterns = [
     path('view-tasks/<int:id>', views.update_task_view),
     path('view-tasks/<int:id>/select', views.task_completer_select_view),
     path('view-tasks/<int:id>/complete', views.task_completer_complete_view),
+    path('view-tasks/<pk>/class-view', views.TaskUpdate.as_view())
 ]
