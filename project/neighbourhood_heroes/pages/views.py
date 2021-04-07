@@ -74,11 +74,13 @@ class TaskStatusUpdate(APIView):
             task.save()
             serializer = TaskSerializer(task)
             return Response(serializer.data)
-        elif action == "complete":
+        elif (action == "complete") and (task.assigned):
             task.completed = True
             task.save()
             serializer = TaskSerializer(task)
             return Response(serializer.data)
+        elif (action == "complete"):
+            raise Exception("You cannot complete a task which has not been assigned")
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
