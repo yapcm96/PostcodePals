@@ -8,7 +8,7 @@ class Task(models.Model):
     location = models.CharField(max_length=200, null = True)
     estimated_duration_mins = models.DecimalField(decimal_places = 2, max_digits = 10)
     deadline = models.CharField(max_length=200, null = True)
-    notes = models.CharField(max_length=200, null = True)
+    notes = models.CharField(max_length=200, null = True, blank = True)
     assigned = models.BooleanField(default=False)
     completed = models.BooleanField(default=False)
     task_setter = models.CharField(max_length=200, null=True)
