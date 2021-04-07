@@ -1,12 +1,17 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, JsonResponse, HttpRequest
 import json
+from django.views.generic import ListView
 from django.views.generic.edit import UpdateView
+
 from .models import Task
 
 # Create your views here.
 def index(req):
     return HttpResponse("Hello World!")
+
+class TaskList(ListView):
+    model = Task
 
 def view_tasks(request):
     if request.method == 'GET':
