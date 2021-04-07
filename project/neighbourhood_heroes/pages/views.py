@@ -92,3 +92,8 @@ class StatusUpdate(UpdateView):
     fields = ['status']
 
     success_url = '/'
+
+# Delete request
+def delete_task(request, pk):
+    Task.objects.get(id=pk).delete()
+    return HttpResponse('ok')
