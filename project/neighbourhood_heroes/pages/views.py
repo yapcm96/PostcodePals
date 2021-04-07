@@ -4,6 +4,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.generics import ListAPIView
 from rest_framework.filters import OrderingFilter
+from django_filters.rest_framework import FilterSet, DjangoFilterBackend
 
 from .models import Task
 from .serializers import TaskSerializer
@@ -85,8 +86,9 @@ class TaskStatusUpdate(APIView):
 
 class NewTaskList(ListAPIView):
     serializer_class = TaskSerializer
-    filter_backends = [OrderingFilter]
+    filter_backends = [OrderingFilter, DjangoFilterBackend]
     ordering_fields = ['task', 'estimated_duration_mins', 'task_setter']  # Without this, you can order on any variable
+    filterset_fields = ('task', 'task_setter')
     
     def get_queryset(self):
         queryset = Task.objects.all()
