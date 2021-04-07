@@ -1,7 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, JsonResponse, HttpRequest
 import json
-
+from django.views.generic.edit import UpdateView
 from .models import Task
 
 # Create your views here.
@@ -55,3 +55,30 @@ def view_tasks(request):
         required_task.save()
         return HttpResponse(status=200)
         print(required_task)
+
+# view for updating specific task by tasks setter
+class TaskUpdate(UpdateView):
+    model = Task
+    template_name = 'placeholder_form_template.html'
+    fields = [
+        'task',
+        'type_of_task',
+        'location',
+        'estimated_duration_mins',
+        'deadline',
+        'notes',
+        'status',
+        'task_setter'
+        ]
+
+    success_url = '/'
+    
+# view for updating the status of a task
+class StatusUpdate(UpdateView):
+    model = Task
+    template_name = 'placeholder_form_template.html'
+    fields = ['status']
+
+    success_url = '/'
+        
+        
