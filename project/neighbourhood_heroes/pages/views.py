@@ -1,15 +1,28 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpRequest, HttpResponse, JsonResponse
+from django.http import HttpRequest, HttpResponse, JsonResponse, Http404
 from django.views.generic import View, ListView, DetailView
 from django.views.generic.edit import UpdateView
 from django.core import serializers
+from rest_framework import status
+from rest_framework.views import APIView
+from rest_framework.response import Response
 import json
 
 from .models import Task
+from .serializers import TaskSerializer
 
 # Create your views here.
 def index(req):
     return HttpResponse("Hello World!")
+
+class NewTaskList(APIView):
+    """
+    List all tasks, or create a new task.
+    """
+    def get(self, request, format=None):
+        tasks = Task.objects.all()
+        serializer = TaskSerializer(tasks, many=True)
+        return Response(serializer.data)
 
 class TaskList(ListView):
     model = Task
