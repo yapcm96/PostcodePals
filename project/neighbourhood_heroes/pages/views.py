@@ -85,6 +85,8 @@ class TaskStatusUpdate(APIView):
 
 class NewTaskList(ListAPIView):
     serializer_class = TaskSerializer
+    filter_backends = [OrderingFilter]
+    ordering_fields = ['task', 'estimated_duration_mins', 'task_setter']  # Without this, you can order on any variable
     
     def get_queryset(self):
         queryset = Task.objects.all()
