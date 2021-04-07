@@ -1,8 +1,9 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse, JsonResponse, HttpRequest
-import json
-from django.views.generic import ListView
+from django.http import HttpRequest, HttpResponse, JsonResponse
+from django.views.generic import View, ListView, DetailView
 from django.views.generic.edit import UpdateView
+from django.core import serializers
+import json
 
 from .models import Task
 
@@ -12,6 +13,12 @@ def index(req):
 
 class TaskList(ListView):
     model = Task
+
+    # GET request overrides standard ListView GET functionality
+    def get(self, requests, *args, **kwargs):
+        queryset = self.get_queryset()
+        response = serializers.serialize("json", queryset)
+        return JsonResponse(data=response, status=200, safe=False)
 
 def view_tasks(request):
     if request.method == 'GET':
@@ -85,5 +92,3 @@ class StatusUpdate(UpdateView):
     fields = ['status']
 
     success_url = '/'
-        
-        
