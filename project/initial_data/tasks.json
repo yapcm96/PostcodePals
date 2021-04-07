@@ -6,7 +6,6 @@
         "estimated_duration_mins": 60,
         "deadline": "Thursday 8 April at 12pm",
         "notes": "White bread, eggs, whole milk",
-        "status": "",
         "task_setter": "Beth"
     },
     {
@@ -16,7 +15,6 @@
         "estimated_duration_mins": 40,
         "deadline": "Thursday 8 April at 6pm",
         "notes": "Bonus points if you make a stripe pattern in the grass",
-        "status": "",
         "task_setter": "Mahbub"
     },
     {
@@ -26,7 +24,6 @@
         "estimated_duration_mins": 10,
         "deadline": "Wednesday 7 April at 4pm",
         "notes": "",
-        "status": "",
         "task_setter": "Asel"
     }
 ]

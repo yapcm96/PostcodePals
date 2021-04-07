@@ -1,5 +1,4 @@
 from django.http import HttpResponse
-from django.views.generic.edit import UpdateView
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -57,10 +56,29 @@ class TaskDetail(APIView):
         task.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
     
-# view for updating the status of a task
-class StatusUpdate(UpdateView):
-    model = Task
-    template_name = 'placeholder_form_template.html'
-    fields = ['status']
 
-    success_url = '/'
+class TaskStatusUpdate(APIView):
+    """
+    Update assigned or completed fields.
+    """
+    def get_object(self, pk):
+        try:
+            return Task.objects.get(pk=pk)
+        except Task.DoesNotExist:
+            raise Http404
+
+    def put(self, request, pk, action, format=None):
+        task = self.get_object(pk)
+        if action == "select":
+            task.assigned = True
+            task.save()
+            serializer = TaskSerializer(task)
+            return Response(serializer.data)
+        elif action == "complete":
+            task.completed = True
+            task.save()
+            serializer = TaskSerializer(task)
+            return Response(serializer.data)
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
