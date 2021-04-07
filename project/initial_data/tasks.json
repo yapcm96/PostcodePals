@@ -2,7 +2,7 @@
     {
         "task": "Pick up groceries from Tesco",
         "type_of_task": "Shopping",
-        "location": "London",
+        "location": "Edinburgh",
         "estimated_duration_mins": 60,
         "deadline": "Thursday 8 April at 12pm",
         "notes": "White bread, eggs, whole milk",
