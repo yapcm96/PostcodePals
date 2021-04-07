@@ -12,6 +12,5 @@ class TaskSerializer(serializers.HyperlinkedModelSerializer):
             'estimated_duration_mins',
             'deadline',
             'notes',
-            'status',
             'task_setter',
         )

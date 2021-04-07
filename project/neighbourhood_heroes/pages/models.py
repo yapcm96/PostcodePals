@@ -9,7 +9,8 @@ class Task(models.Model):
     estimated_duration_mins = models.DecimalField(decimal_places = 2, max_digits = 10)
     deadline = models.CharField(max_length=200, null = True)
     notes = models.CharField(max_length=200, null = True)
-    status = models.CharField(max_length=200, default = "Open")
+    assigned = models.BooleanField(default=False)
+    completed = models.BooleanField(default=False)
     task_setter = models.CharField(max_length=200, null=True)
 
     def __str__(self):
