@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'pages',
     'rest_framework',
     'users.apps.UsersConfig',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
