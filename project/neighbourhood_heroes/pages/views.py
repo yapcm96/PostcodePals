@@ -5,6 +5,7 @@ from rest_framework.response import Response
 
 from .models import Task
 from .serializers import TaskSerializer
+from .exceptions import TaskNotAssigned
 
 # Create your views here.
 def index(req):
@@ -80,7 +81,7 @@ class TaskStatusUpdate(APIView):
             serializer = TaskSerializer(task)
             return Response(serializer.data)
         elif (action == "complete"):
-            raise Exception("You cannot complete a task which has not been assigned")
+            raise TaskNotAssigned()
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
