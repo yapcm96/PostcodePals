@@ -31,6 +31,22 @@ class NewTaskList(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+class NewTaskDetail(APIView):
+    """
+    Retrieve, update or delete a task instance.
+    """
+    # Simplify using get_object_or_404?
+    def get_object(self, pk):
+        try:
+            return Task.objects.get(pk=pk)
+        except Task.DoesNotExist:
+            raise Http404
+    
+    def get(self, request, pk, format=None):
+        task = self.get_object(pk)
+        serializer = TaskSerializer(task)
+        return Response(serializer.data)
+
 class TaskList(ListView):
     model = Task
 
