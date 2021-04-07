@@ -2,6 +2,8 @@ from django.http import HttpResponse
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.generics import ListAPIView
+from rest_framework.filters import OrderingFilter
 
 from .models import Task
 from .serializers import TaskSerializer
@@ -56,7 +58,6 @@ class TaskDetail(APIView):
         task.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
     
-
 class TaskStatusUpdate(APIView):
     """
     Update assigned or completed fields.
@@ -82,3 +83,12 @@ class TaskStatusUpdate(APIView):
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
+class NewTaskList(ListAPIView):
+    serializer_class = TaskSerializer
+    
+    def get_queryset(self):
+        queryset = Task.objects.all()
+        task_setter = self.request.query_params.get('task_setter')
+        if task_setter is not None:
+            queryset = queryset.filter(task_setter = task_setter)
+        return queryset
