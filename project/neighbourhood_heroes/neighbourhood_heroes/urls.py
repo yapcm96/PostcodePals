@@ -15,10 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from users import views as user_registration_view
 
 
 urlpatterns = [
     path('admin/', admin.site.urls), # Admin URL
     path('', include('pages.urls')), # Root URL
     path('api-auth/', include('rest_framework.urls')), # To use browser API
+    path('users/', include('users.urls', 'users_api')), #to register new users
 ]

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     # Own apps
     'pages',
     'rest_framework',
+    'users.apps.UsersConfig',
 ]
 
 MIDDLEWARE = [
@@ -69,6 +70,8 @@ TEMPLATES = [
         },
     },
 ]
+
+AUTH_USER_MODEL = "users.USER"
 
 WSGI_APPLICATION = 'neighbourhood_heroes.wsgi.application'
 
