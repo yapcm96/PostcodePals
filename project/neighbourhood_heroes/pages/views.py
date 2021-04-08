@@ -2,6 +2,8 @@ from django.http import HttpResponse, Http404
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 from .models import Task
 from .serializers import TaskSerializer
@@ -15,6 +17,7 @@ class TaskList(APIView):
     """
     List all tasks, or create a new task.
     """
+
     def get(self, request, format=None):
         tasks = Task.objects.all()
         serializer = TaskSerializer(tasks, many=True)
@@ -31,6 +34,9 @@ class TaskDetail(APIView):
     """
     Retrieve, update or delete a task instance.
     """
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
     # Simplify using get_object_or_404?
     def get_object(self, pk):
         try:
