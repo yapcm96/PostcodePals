@@ -39,10 +39,20 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Own apps
     'pages',
-    'rest_framework',
     'users.apps.UsersConfig',
     'django_filters',
+    # Extra apps
+    'rest_framework',
+    'rest_framework.authtoken'
+
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        
+    ]
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -110,7 +120,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en-gb'
 
 TIME_ZONE = 'UTC'
 

@@ -5,9 +5,12 @@ from rest_framework.response import Response
 from rest_framework.generics import ListAPIView
 from rest_framework.filters import OrderingFilter
 from django_filters.rest_framework import FilterSet, DjangoFilterBackend
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 from .models import Task
 from .serializers import TaskSerializer
+from .exceptions import TaskNotAssigned
 
 # Create your views here.
 def index(req):
@@ -17,6 +20,7 @@ class TaskList(APIView):
     """
     List all tasks, or create a new task.
     """
+
     def get(self, request, format=None):
         tasks = Task.objects.all()
         serializer = TaskSerializer(tasks, many=True)
@@ -33,6 +37,9 @@ class TaskDetail(APIView):
     """
     Retrieve, update or delete a task instance.
     """
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
     # Simplify using get_object_or_404?
     def get_object(self, pk):
         try:
@@ -76,11 +83,13 @@ class TaskStatusUpdate(APIView):
             task.save()
             serializer = TaskSerializer(task)
             return Response(serializer.data)
-        elif action == "complete":
+        elif (action == "complete") and (task.assigned):
             task.completed = True
             task.save()
             serializer = TaskSerializer(task)
             return Response(serializer.data)
+        elif (action == "complete"):
+            raise TaskNotAssigned()
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
