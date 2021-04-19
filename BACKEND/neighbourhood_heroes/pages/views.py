@@ -13,8 +13,11 @@ from .serializers import TaskSerializer
 from .exceptions import TaskNotAssigned
 
 # Create your views here.
+
+
 def index(req):
     return HttpResponse("Hello World!")
+
 
 class TaskList(APIView):
     """
@@ -33,6 +36,7 @@ class TaskList(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 class TaskDetail(APIView):
     """
     Retrieve, update or delete a task instance.
@@ -46,7 +50,7 @@ class TaskDetail(APIView):
             return Task.objects.get(pk=pk)
         except Task.DoesNotExist:
             raise Http404
-    
+
     def get(self, request, pk, format=None):
         task = self.get_object(pk)
         serializer = TaskSerializer(task)
@@ -65,11 +69,13 @@ class TaskDetail(APIView):
         task = self.get_object(pk)
         task.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-    
+
+
 class TaskStatusUpdate(APIView):
     """
     Update assigned or completed fields.
     """
+
     def get_object(self, pk):
         try:
             return Task.objects.get(pk=pk)
@@ -93,15 +99,17 @@ class TaskStatusUpdate(APIView):
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
+
 class NewTaskList(ListAPIView):
     serializer_class = TaskSerializer
     filter_backends = [OrderingFilter, DjangoFilterBackend]
-    ordering_fields = ['task', 'estimated_duration_mins', 'task_setter']  # Without this, you can order on any variable
+    # Without this, you can order on any variable
+    ordering_fields = ['task', 'estimated_duration_mins', 'task_setter']
     filterset_fields = ('task', 'task_setter')
-    
+
     def get_queryset(self):
         queryset = Task.objects.all()
         task_setter = self.request.query_params.get('task_setter')
         if task_setter is not None:
-            queryset = queryset.filter(task_setter = task_setter)
+            queryset = queryset.filter(task_setter=task_setter)
         return queryset

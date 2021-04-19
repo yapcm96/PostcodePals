@@ -1,9 +1,11 @@
-const Dropdown = () => {
+const Dropdown = ({ label, options }) => {
   return (
     <div>
+      <label>{label}</label>
       <select>
-        <option>time</option>
-        <option>location</option>
+        {options.map((option) => (
+          <option>{option}</option>
+        ))}
       </select>
     </div>
   );
