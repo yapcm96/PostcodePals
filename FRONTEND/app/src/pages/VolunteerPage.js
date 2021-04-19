@@ -53,6 +53,7 @@ const VolunteerPage = () => {
   useEffect(() => {
     const fetchFromAPI = async () => {
       const tasksFromServer = await fetchTasks();
+
       setTasks(tasksFromServer);
     };
     fetchFromAPI();

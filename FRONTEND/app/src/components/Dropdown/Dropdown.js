@@ -4,7 +4,7 @@ const Dropdown = ({ label, options }) => {
       <label>{label}</label>
       <select>
         {options.map((option) => (
-          <option>{option}</option>
+          <option key={option}>{option}</option>
         ))}
       </select>
     </div>
