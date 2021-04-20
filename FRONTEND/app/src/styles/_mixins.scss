@@ -1,0 +1,54 @@
+@mixin margin($r: auto, $l: auto, $t: null, $b: null) {
+  // just used to centre things
+  // when setting margin manually, faster to do "margin: 1px 10px 20px 5px"
+  margin-right: $r;
+  margin-left: $l;
+  margin-top: $t;
+  margin-bottom: $b;
+}
+
+@mixin flex($dir: row, $jc: center, $ai: center) {
+  display: flex;
+  flex-direction: $dir;
+  justify-content: $jc; // centers its children on main axis (usually x)
+  align-items: $ai; // centers its children on other axis (usually y)
+}
+
+@mixin box($w: 200px, $h: 100px, $br: 1px, $color: white) {
+  // variables start with a $, ":" gives default
+  height: $h;
+  width: $w;
+  border-radius: $br;
+  color: $color;
+}
+
+$breakpoints: (
+  "phone": 400px,
+  // xxs
+  "phone-wide": 480px,
+  // xs
+  "phablet": 576px,
+  // sm
+  "tablet": 768px,
+  //md
+  "tablet-wide": 992px,
+  // lg
+  "desktop": 1200px,
+  //xl
+  "desktop-wide": 1440px,
+);
+@mixin mq($width, $type: min) {
+  @if map_has_key($breakpoints, $width) {
+    $width: map_get($breakpoints, $width);
+    @if $type == max {
+      $width: $width - 1px;
+    }
+    @media only screen and (#{$type}-width: $width) {
+      @content;
+    }
+  }
+}
+// To use inside class:
+// @include mq("phablet") {
+//   background-color: blue;
+// }

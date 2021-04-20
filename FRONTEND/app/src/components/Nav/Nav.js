@@ -1,17 +1,21 @@
 import { NavLink } from "react-router-dom";
+import style from "./nav.module.scss";
+import { BiTask, BiMessageDetail, BiHome } from "react-icons/bi";
 
 const Nav = () => {
   return (
-    <nav>
-      <NavLink exact to="/">
-        Home
+    <nav className={style.navbar}>
+      <NavLink exact activeClassName={style.activeLink} to="/">
+        <BiHome fontSize={30} /> Home
       </NavLink>
       <br />
-      <NavLink exact to="/tasks">
+      <NavLink exact activeClassName={style.activeLink} to="/tasks">
+        <BiTask fontSize={30} />
         Tasks
       </NavLink>
       <br />
-      <NavLink exact to="/contact">
+      <NavLink exact activeClassName={style.activeLink} to="/contact">
+        <BiMessageDetail fontSize={30} />
         Contact us
       </NavLink>
     </nav>

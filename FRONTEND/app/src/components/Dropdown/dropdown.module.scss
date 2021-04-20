@@ -1,0 +1,33 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.dropdownBtn {
+  @include flex;
+  position: relative;
+  cursor: pointer;
+  flex: 1;
+  height: 50px;
+}
+.label {
+  color: white;
+}
+
+.dropdown {
+  position: absolute;
+  text-align: center;
+  color: white;
+  top: 50px;
+  overflow: hidden;
+  background-color: $lightColor;
+  border-radius: 8px;
+  box-shadow: 0 5px 5px 2px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+.dropdownItem {
+  cursor: pointer;
+  padding: 5px 0;
+  &:hover {
+    background-color: $midColor;
+  }
+}

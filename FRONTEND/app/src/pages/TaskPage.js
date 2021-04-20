@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Button from '../components/Button/Button'
+import Button from "../components/Button/Button";
 
 const TaskPage = (props) => {
   // pulls id from the url
@@ -43,10 +43,9 @@ const TaskPage = (props) => {
       <p>Assigned: {task.assigned ? "True" : "False"}</p>
       <p>Completed: {task.completed ? "True" : "False"}</p>
       <p>Task setter: {task.task_setter}</p>
-      <Button buttonText={task.assigned ? "Mark as completed" : "Assign to me"}/>
-      <Button buttonText="Edit"/>
-      <Button buttonText="Delete"/>
-
+      <Button>{task.assigned ? "Mark as completed" : "Assign to me"}</Button>
+      <Button>Edit</Button>
+      <Button>Delete</Button>
     </div>
   );
 };

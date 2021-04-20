@@ -1,0 +1,10 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.dropdowns {
+  @include flex;
+  margin: 0 10px;
+  height: 50px;
+  border-radius: 5px;
+  background-color: $midColor;
+}
