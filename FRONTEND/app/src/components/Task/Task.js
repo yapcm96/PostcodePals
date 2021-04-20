@@ -1,4 +1,4 @@
-import Button from "../Button/Button";
+// import Button from "../Button/Button";
 import TaskPage from "../../pages/TaskPage";
 import { Link } from "react-router-dom";
 
@@ -10,7 +10,6 @@ const Task = ({ taskItem }) => {
       <h3>Task: {taskItem.task}</h3>
       <h4>Location: {taskItem.location}</h4>
       <h4>Deadline: {taskItem.deadline}</h4>
-      
     </Link>
   );
 };

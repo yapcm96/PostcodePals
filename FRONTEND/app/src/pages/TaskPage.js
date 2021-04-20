@@ -32,6 +32,38 @@ const TaskPage = (props) => {
     return data;
   };
 
+  const handleClickAssignButton = async (id) => {
+    //want to change the value of assigned to true
+    console.log(id);
+    console.log(task);
+    // this is successfully changing the value
+    const assignedTask = { ...task, assigned: !task.assigned };
+    // changes the state of Task so that it updates on the page
+    // maybe we should do this only after the PUT request
+    setTask(assignedTask);
+    console.log("changed assigned to true");
+    console.log(assignedTask);
+    let resBody = JSON.stringify(assignedTask);
+    // do a PUT request to change the value on the database
+    // PUT req working
+    const res = await fetch(`http://localhost:8000/tasks/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: resBody,
+    });
+  };
+
+  const handleClickCompleteButton = async (id) => {
+    const completedTask = { ...task, completed: true };
+    setTask(completedTask);
+    let resBody = JSON.stringify(completedTask);
+    const res = await fetch(`http://localhost:8000/tasks/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: resBody,
+    });
+  };
+
   return (
     <div>
       <h2>Task: {task.task}</h2>
@@ -43,7 +75,20 @@ const TaskPage = (props) => {
       <p>Assigned: {task.assigned ? "True" : "False"}</p>
       <p>Completed: {task.completed ? "True" : "False"}</p>
       <p>Task setter: {task.task_setter}</p>
-      <Button>{task.assigned ? "Mark as completed" : "Assign to me"}</Button>
+
+      {task.completed && "Thanks for completing!"}
+      {!task.completed && (
+        <Button
+          onClick={
+            task.assigned
+              ? () => handleClickCompleteButton(task.id)
+              : () => handleClickAssignButton(task.id)
+          }
+        >
+          {task.assigned ? "Mark as completed" : "Assign to me"}
+        </Button>
+      )}
+
       <Button>Edit</Button>
       <Button>Delete</Button>
     </div>
