@@ -25,12 +25,11 @@ SECRET_KEY = 'k+v=6a8ht)t5yft+@r1*&6@)7o_yij8*7!1uso7^#z9@46a3gi'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
 
 # Application definition
 
 INSTALLED_APPS = [
+    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -43,7 +42,8 @@ INSTALLED_APPS = [
     'django_filters',
     # Extra apps
     'rest_framework',
-    'rest_framework.authtoken'
+    'rest_framework.authtoken',
+    # prevent cors error
 
 ]
 
@@ -55,6 +55,8 @@ REST_FRAMEWORK = {
 }
 
 MIDDLEWARE = [
+    # prevent cors error
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -64,11 +66,14 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:8000",
-    "http://localhost:3000"
-
-]
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:8000",
+#     "http://localhost:3000"
+# ]
+# prevent cors error
+CORS_ORIGIN_ALLOW_ALL = True
+ALLOWED_HOSTS = ['*']
+print('from settings')
 
 ROOT_URLCONF = 'neighbourhood_heroes.urls'
 
