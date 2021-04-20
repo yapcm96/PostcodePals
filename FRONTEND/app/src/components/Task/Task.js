@@ -6,10 +6,11 @@ const Task = ({ taskItem }) => {
   const taskURL = `/tasks/${taskItem.id}`;
 
   return (
-    <Link to={taskURL}>
-      <h3>{taskItem.task}</h3>
-      <h4>{taskItem.type_of_task}</h4>
-      <Button buttonText="assign" />
+    <Link exact to={taskURL}>
+      <h3>Task: {taskItem.task}</h3>
+      <h4>Location: {taskItem.location}</h4>
+      <h4>Deadline: {taskItem.deadline}</h4>
+      
     </Link>
   );
 };

@@ -5,6 +5,7 @@ import HomePage from "./pages/HomePage";
 import ContactPage from "./pages/ContactPage";
 import TasksPage from "./pages/TasksPage";
 import TaskPage from "./pages/TaskPage";
+import NewTaskPage from "./pages/NewTaskPage";
 //import Task from "./components/Task/Task"
 
 function App() {
@@ -17,10 +18,15 @@ function App() {
         <Route exact path="/" component={HomePage} />
         <Route exact path="/tasks" component={TasksPage} />
         <Route exact path="/contact" component={ContactPage} />
+        <Route exact path="/tasks/new" component={NewTaskPage} />
         <Route exact path="/tasks/:id" component={TaskPage} />
+        
+        
       </Switch>
     </div>
   );
 }
 
 export default App;
+
+

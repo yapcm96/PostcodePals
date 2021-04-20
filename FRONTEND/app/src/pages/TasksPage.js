@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { Link } from 'react-router-dom';
 import Tasks from "../components/Tasks/Tasks";
 import Dropdowns from "../components/Dropdowns/Dropdowns";
+import Button from "../components/Button/Button";
 
 const TasksPage = () => {
   
@@ -33,8 +35,9 @@ const TasksPage = () => {
 
   return (
     <div>
-      <h1>Volunteer</h1>
+      <h1>Tasks</h1>
       <Dropdowns />
+      <Link exact to ="/tasks/new"><Button buttonText="Add Task" /></Link>
       <Tasks taskList={tasks} />
     </div>
   );
