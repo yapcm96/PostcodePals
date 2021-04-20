@@ -41,8 +41,8 @@ class TaskDetail(APIView):
     """
     Retrieve, update or delete a task instance.
     """
-    authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated]
+    #authentication_classes = [TokenAuthentication]
+    #permission_classes = [IsAuthenticated]
 
     # Simplify using get_object_or_404?
     def get_object(self, pk):

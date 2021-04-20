@@ -7,12 +7,12 @@ const Nav = () => {
         Home
       </NavLink>
       <br />
-      <NavLink exact to="/volunteer">
-        Volunteer
+      <NavLink exact to="/tasks">
+        Tasks
       </NavLink>
       <br />
-      <NavLink exact to="/asker">
-        Ask for help
+      <NavLink exact to="/contact">
+        Contact us
       </NavLink>
     </nav>
   );
