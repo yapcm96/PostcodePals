@@ -47,15 +47,44 @@ const TasksPage = () => {
     );
     const data = await res.json();
 
-    console.log(data);
-    setTasks(data);
-    return data;
-  };
+  const filterChoiceFetch = async (locationFilter, taskTypeFilter, sortByValue) => {
+    if (sortByValue === 'Duration') {
+      sortByValue = 'estimated_duration_mins'
+    }
+    if (sortByValue === 'Task Setter') {
+      sortByValue = 'task_setter'
+    }
+   
+    let urlString = "http://localhost:8000/tasks-new?";
+    const dict = { "location": locationFilter, "type_of_task": taskTypeFilter, "ordering": sortByValue};
+    // logic to check if either of filters are empty strings
+    // needs a hard refresh to change back to no filter option 
+    for (let i in dict) {
+      if ( dict[i] !== "") {
+          // append the filter to the urlString
+          urlString = urlString + (`${i}=${dict[i]}&`)
+          console.log(urlString)
+          
+      }
+    }
+
+    const res = await fetch(urlString, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+     });
+     const data = await res.json()
+
+     console.log(data)
+     setTasks(data)
+    return data
+   }
 
   return (
     <div>
-      <Dropdowns filterChoice={filterChoice} />
-
+      <h1>Tasks</h1>
+      <Dropdowns filterChoiceFetch={filterChoiceFetch} />
       <Button className={style.addTaskBtn} linkTo="/tasks/new">
         <MdAddCircle />
         <span>Add Task</span>

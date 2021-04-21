@@ -18,7 +18,7 @@ const Dropdown = ({
     if (onChange) {
       onChange(option);
     }
-    filterChoice(option, dropdownType);
+    // filterChoice(option, dropdownType)
   };
   return (
     <div className={style.dropdownBtn} onClick={onClick}>

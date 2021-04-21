@@ -104,8 +104,8 @@ class NewTaskList(ListAPIView):
     serializer_class = TaskSerializer
     filter_backends = [OrderingFilter, DjangoFilterBackend]
     # Without this, you can order on any variable
-    ordering_fields = ['task', 'estimated_duration_mins', 'task_setter']
-    filterset_fields = ('task_setter', 'location', 'type_of_task', 'assigned', 'completed', )
+    ordering_fields = [ 'task_setter','estimated_duration_mins']
+    filterset_fields = ('task_setter', 'location', 'type_of_task', 'assigned', 'completed',)
 
     def get_queryset(self):
         queryset = Task.objects.all()

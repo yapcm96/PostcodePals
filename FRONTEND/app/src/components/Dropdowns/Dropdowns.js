@@ -3,10 +3,13 @@ import style from "./dropdowns.module.scss";
 import { useState } from "react";
 import Button from "../Button/Button";
 
-const Dropdowns = ({ filterChoice }) => {
+const Dropdowns = ({ filterChoiceFetch }) => {
   const [openIndex, setOpenIndex] = useState();
   // when location filter changes call back end with new filter:
-  // const [locationFilter, setLocationFilter] = useState();
+  const [locationFilter, setLocationFilter] = useState("");
+  const [taskTypeFilter, setTaskTypeFilter] = useState("");
+  const [sortByValue, setSortByValue] = useState("");
+
   const openDropdown = (index) => {
     if (index === openIndex) {
       setOpenIndex(-1);
@@ -14,29 +17,32 @@ const Dropdowns = ({ filterChoice }) => {
       setOpenIndex(index);
     }
   };
+
+  const filterSubmit = (e) => {
+    e.preventDefault();
+    filterChoiceFetch(locationFilter, taskTypeFilter, sortByValue);
+  };
+
   // console.log(locationFilter);
   return (
     <div>
       <div className={style.dropdowns}>
         <Dropdown
-          options={["Location", "Type of Task", "Duration"]}
+          options={["Duration", "Task Setter"]}
           label="Sort by"
           isOpen={openIndex === 0}
           onClick={() => openDropdown(0)}
-          dropdownType={"location"}
-          filterChoice={filterChoice}
+          // dropdownType={'sortby'}
+          onChange={setSortByValue}
         />
         <Dropdown
           options={["London", "Edinburgh", "Cardiff"]}
           label="Location"
+          s
           isOpen={openIndex === 1}
           onClick={() => openDropdown(1)}
           // this is built into all forms in HTML (and ours)
-          // onChange={setLocationFilter}
-
-          // would then not neet these:
-          dropdownType="location"
-          filterChoice={filterChoice}
+          onChange={setLocationFilter}
         />
         <Dropdown
           options={[
@@ -48,18 +54,12 @@ const Dropdowns = ({ filterChoice }) => {
           label="Type"
           isOpen={openIndex === 2}
           onClick={() => openDropdown(2)}
-          dropdownType="location"
-          filterChoice={filterChoice}
-        />
-        <Dropdown
-          options={["20m", "40m", "60m"]}
-          label="Duration"
-          isOpen={openIndex === 3}
-          onClick={() => openDropdown(3)}
-          dropdownType="location"
-          filterChoice={filterChoice}
+          onChange={setTaskTypeFilter}
         />
       </div>
+      <Button type="submit" onClick={filterSubmit}>
+        Filter
+      </Button>
     </div>
   );
 };

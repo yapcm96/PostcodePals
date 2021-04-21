@@ -88,6 +88,7 @@ const NewTaskForm = ({
 
     addTask({
       id,
+      type_of_task,
       task,
       location,
       estimated_duration_mins,
