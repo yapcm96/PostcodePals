@@ -9,8 +9,8 @@ const Dropdown = ({ label, options, isOpen, onClick, onChange, filterChoice, dro
     // incase we want an onChange function later:
     if (onChange) {
       onChange(option);
-    }
-    filterChoice(option, dropdownType)
+    } 
+    // filterChoice(option, dropdownType)
   };
   return (
     <div className={style.dropdownBtn} onClick={onClick}>

@@ -17,6 +17,7 @@ const NewTaskForm = ({ addTask }) => {
 
     addTask({
       id,
+      type_of_task,
       task,
       location,
       estimated_duration_mins,
@@ -27,6 +28,7 @@ const NewTaskForm = ({ addTask }) => {
       task_setter,
     });
     setId(0);
+    setType_of_task("");
     setTask("");
     setLocation("");
     setEstimated_duration_mins(0);
