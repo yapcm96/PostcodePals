@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Tasks from "../components/Tasks/Tasks";
 import Dropdowns from "../components/Dropdowns/Dropdowns";
 import Button from "../components/Button/Button";
+//import Dropdown from "../components/Dropdown/Dropdown"
 
 const TasksPage = () => {
   const [tasks, setTasks] = useState([]);
@@ -32,10 +33,25 @@ const TasksPage = () => {
     return data;
   };
 
+
+  const filterChoice = async (option,dropdownType) => {
+    const res = await fetch(`http://localhost:8000/tasks-new?${dropdownType}=${option}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await res.json()
+
+    console.log(data)
+    setTasks(data)
+    return data
+  }
+
   return (
     <div>
       <h1>Tasks</h1>
-      <Dropdowns />
+      <Dropdowns filterChoice={filterChoice} />
       <Link exact to="/tasks/new">
         <Button>Add Task</Button>
       </Link>

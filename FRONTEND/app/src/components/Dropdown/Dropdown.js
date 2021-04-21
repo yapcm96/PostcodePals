@@ -2,14 +2,15 @@ import style from "./dropdown.module.scss";
 import { useState } from "react";
 import { FaCaretDown } from "react-icons/fa";
 
-const Dropdown = ({ label, options, isOpen, onClick, onChange }) => {
+const Dropdown = ({ label, options, isOpen, onClick, onChange, filterChoice, dropdownType }) => {
   const [selected, setSelected] = useState(label);
-  const stateChanged = (option) => {
-    setSelected(option);
+  const stateChanged = (option, dropdownType) => {
+        setSelected(option);
     // incase we want an onChange function later:
     if (onChange) {
       onChange(option);
     }
+    filterChoice(option, dropdownType)
   };
   return (
     <div className={style.dropdownBtn} onClick={onClick}>
@@ -29,7 +30,8 @@ const Dropdown = ({ label, options, isOpen, onClick, onChange }) => {
             <div
               className={style.dropdownItem}
               key={option}
-              onClick={() => stateChanged(option)}
+              onClick={() => stateChanged(option, dropdownType)}
+              value={selected}
             >
               {option}
             </div>
