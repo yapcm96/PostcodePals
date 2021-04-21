@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Button from "../components/Button/Button";
 import NewTaskForm from "../components/NewTaskForm/NewTaskForm";
+import style from "../styles/pagesStyles/taskpage.module.scss";
 
 const TaskPage = (props) => {
   // pulls id from the url
@@ -86,7 +87,7 @@ const TaskPage = (props) => {
   }
 
   return (
-    <div>
+    <div className={style.task}>
       {/* Could have done like this */}
       {/* <h2>
         Task: {isEditing ? <Textfield initialValue={task.task} /> : task.task}
@@ -94,26 +95,30 @@ const TaskPage = (props) => {
       <h2>Task: {task.task}</h2>
       <p>Type of Task: {task.type_of_task}</p>
       <p>Location: {task.location}</p>
-      <p>Estimated duration: {task.estimated_duration_mins}</p>
+      <p>
+        Estimated duration: {Math.round(task.estimated_duration_mins)} minutes
+      </p>
       <p>Deadline: {task.deadline}</p>
       <p>Notes: {task.notes}</p>
       <p>Assigned: {task.assigned ? "True" : "False"}</p>
       <p>Completed: {task.completed ? "True" : "False"}</p>
       <p>Task setter: {task.task_setter}</p>
-      {task.completed && "Thanks for completing!"}
-      {!task.completed && (
-        <Button
-          onClick={
-            task.assigned
-              ? () => handleClickCompleteButton(task.id)
-              : () => handleClickAssignButton(task.id)
-          }
-        >
-          {task.assigned ? "Mark as completed" : "Assign to me"}
-        </Button>
-      )}
-      <Button onClick={() => setIsEditing(true)}>Edit</Button>
-      <Button>Delete</Button>
+      <div>
+        {task.completed && <p>This task has completed!</p>}
+        {!task.completed && (
+          <Button
+            onClick={
+              task.assigned
+                ? () => handleClickCompleteButton(task.id)
+                : () => handleClickAssignButton(task.id)
+            }
+          >
+            {task.assigned ? "Mark as completed" : "Assign to me"}
+          </Button>
+        )}
+        <Button onClick={() => setIsEditing(true)}>Edit</Button>
+        <Button>Delete</Button>
+      </div>
     </div>
   );
 };

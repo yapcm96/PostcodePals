@@ -1,0 +1,45 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.NewTaskForm {
+  @include margin;
+  width: calc(100% - 20px);
+
+  h2 {
+    margin: 20px 0;
+  }
+
+  label {
+    color: $grey;
+  }
+
+  input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid $grey;
+    border-radius: 5px;
+  }
+
+  input[type="submit"] {
+    background-color: $midColor;
+    border: none;
+    box-shadow: 5px 5px 5px 0px rgba($color: #000000, $alpha: 0.1);
+    color: white;
+    border-radius: 5px;
+  }
+
+  input[type="submit"]:hover {
+    background-color: lighten($color: $midColor, $amount: 5);
+  }
+  div {
+    @include flex($jc: space-around);
+    margin-bottom: 20px;
+    span {
+      @include flex;
+    }
+    input {
+      margin: 0 10px;
+    }
+  }
+}

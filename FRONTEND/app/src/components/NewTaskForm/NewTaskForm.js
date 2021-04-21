@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import TaskPage from "../../pages/TaskPage";
 import { useHistory } from "react-router-dom";
+import style from "./newtaskform.module.scss";
 
 const NewTaskForm = ({
   isEditing,
@@ -79,12 +80,6 @@ const NewTaskForm = ({
       completed,
       task_setter,
     });
-
-    //<TaskPage
-    // key={task.id}
-    // taskItem={task}
-    // />;
-    // history.push(`/tasks/${id}`);
   };
 
   const submitTask = (e) => {
@@ -102,23 +97,16 @@ const NewTaskForm = ({
       completed,
       task_setter,
     });
-    setId(0);
-    setTask("");
-    setLocation("");
-    setEstimated_duration_mins(0);
-    setDeadline("");
-    setNotes("");
-    setAssigned(false);
-    setCompleted(false);
-    setTask_Setter("");
   };
 
   return (
     <form
+      className={style.NewTaskForm}
       onSubmit={
         initialTask.task === "" ? (e) => submitTask(e) : (e) => updateTask(e)
       }
     >
+      <h2>Edit task</h2>
       <label>Id</label>
       <input
         type="number"
@@ -147,7 +135,7 @@ const NewTaskForm = ({
         value={location}
         onChange={(e) => setLocation(e.target.value)}
       />
-      <label>Estimated duration</label>
+      <label>Estimated duration (minutes)</label>
       <input
         type="number"
         name="estimated_duration_mins"
@@ -168,20 +156,26 @@ const NewTaskForm = ({
         value={notes}
         onChange={(e) => setNotes(e.target.value)}
       />
-      <label>Assigned</label>
-      <input
-        type="checkbox"
-        checked={assigned}
-        value={assigned}
-        onChange={(e) => setAssigned(e.currentTarget.checked)}
-      ></input>
-      <label>Completed</label>
-      <input
-        type="checkbox"
-        checked={completed}
-        value={completed}
-        onChange={(e) => setCompleted(e.currentTarget.checked)}
-      ></input>
+      <div>
+        <span>
+          <label>Assigned</label>
+          <input
+            type="checkbox"
+            checked={assigned}
+            value={assigned}
+            onChange={(e) => setAssigned(e.currentTarget.checked)}
+          ></input>
+        </span>
+        <span>
+          <label>Completed</label>
+          <input
+            type="checkbox"
+            checked={completed}
+            value={completed}
+            onChange={(e) => setCompleted(e.currentTarget.checked)}
+          ></input>
+        </span>
+      </div>
       <label>Task setter</label>
       <input
         type="text"
@@ -189,7 +183,7 @@ const NewTaskForm = ({
         value={task_setter}
         onChange={(e) => setTask_Setter(e.target.value)}
       />
-      <input type="submit" />
+      <input type="submit" value="Submit Task" />
     </form>
   );
 };

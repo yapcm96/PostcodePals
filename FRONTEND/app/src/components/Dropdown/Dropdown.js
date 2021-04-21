@@ -2,15 +2,23 @@ import style from "./dropdown.module.scss";
 import { useState } from "react";
 import { FaCaretDown } from "react-icons/fa";
 
-const Dropdown = ({ label, options, isOpen, onClick, onChange, filterChoice, dropdownType }) => {
+const Dropdown = ({
+  label,
+  options,
+  isOpen,
+  onClick,
+  onChange,
+  filterChoice,
+  dropdownType,
+}) => {
   const [selected, setSelected] = useState(label);
   const stateChanged = (option, dropdownType) => {
-        setSelected(option);
+    setSelected(option);
     // incase we want an onChange function later:
     if (onChange) {
       onChange(option);
     }
-    filterChoice(option, dropdownType)
+    filterChoice(option, dropdownType);
   };
   return (
     <div className={style.dropdownBtn} onClick={onClick}>

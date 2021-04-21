@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import Tasks from "../components/Tasks/Tasks";
 import Dropdowns from "../components/Dropdowns/Dropdowns";
 import Button from "../components/Button/Button";
+import style from "../styles/pagesStyles/taskspage.module.scss";
+import { MdAddCircle } from "react-icons/md";
 //import Dropdown from "../components/Dropdown/Dropdown"
 
 const TasksPage = () => {
@@ -33,28 +35,31 @@ const TasksPage = () => {
     return data;
   };
 
+  const filterChoice = async (option, dropdownType) => {
+    const res = await fetch(
+      `http://localhost:8000/tasks-new?${dropdownType}=${option}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const data = await res.json();
 
-  const filterChoice = async (option,dropdownType) => {
-    const res = await fetch(`http://localhost:8000/tasks-new?${dropdownType}=${option}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    const data = await res.json()
-
-    console.log(data)
-    setTasks(data)
-    return data
-  }
+    console.log(data);
+    setTasks(data);
+    return data;
+  };
 
   return (
     <div>
-      <h1>Tasks</h1>
       <Dropdowns filterChoice={filterChoice} />
-      <Link exact to="/tasks/new">
-        <Button>Add Task</Button>
-      </Link>
+
+      <Button className={style.addTaskBtn} linkTo="/tasks/new">
+        <MdAddCircle />
+        <span>Add Task</span>
+      </Button>
       <Tasks taskList={tasks} />
     </div>
   );

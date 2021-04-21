@@ -5,16 +5,16 @@ import { BiTask, BiMessageDetail, BiHome } from "react-icons/bi";
 const Nav = () => {
   return (
     <nav className={style.navbar}>
-      <NavLink exact activeClassName={style.activeLink} to="/">
+      <NavLink exact={true} activeClassName={style.activeLink} to="/">
         <BiHome fontSize={30} /> Home
       </NavLink>
       <br />
-      <NavLink exact activeClassName={style.activeLink} to="/tasks">
+      <NavLink exact={true} activeClassName={style.activeLink} to="/tasks">
         <BiTask fontSize={30} />
         Tasks
       </NavLink>
       <br />
-      <NavLink exact activeClassName={style.activeLink} to="/contact">
+      <NavLink exact={true} activeClassName={style.activeLink} to="/contact">
         <BiMessageDetail fontSize={30} />
         Contact us
       </NavLink>

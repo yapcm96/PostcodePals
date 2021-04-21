@@ -1,0 +1,19 @@
+@import "../variables";
+@import "../mixins";
+
+.addTaskBtn {
+  margin: 10px 10px 25px 10px;
+  height: 50px;
+  padding: 0;
+  width: calc(100% - 20px);
+  font-size: 1.3rem;
+  background-color: $accentLight;
+  color: white;
+  span {
+    margin-left: 5px;
+  }
+}
+
+.addTaskBtn:hover {
+  background-color: lighten($color: $accentLight, $amount: 5);
+}

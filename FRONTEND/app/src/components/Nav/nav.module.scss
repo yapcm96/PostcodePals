@@ -2,8 +2,9 @@
 @import "../../styles/mixins";
 
 .navbar {
-  @include flex($jc: space-around);
+  @include flex($jc: space-around, $ai: flex-end);
   background-color: $darkColor;
+  height: 60px;
   a {
     @include flex(column);
     font-size: 0.8rem;

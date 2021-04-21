@@ -1,0 +1,17 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.btn {
+  @include flex;
+  background-color: $midColor;
+  padding: 5px;
+  border: none;
+  box-shadow: 5px 5px 5px 0px rgba($color: #000000, $alpha: 0.1);
+  color: white;
+  border-radius: 5px;
+}
+
+.btn:hover {
+  background-color: lighten($color: $midColor, $amount: 5);
+  text-decoration: none;
+}

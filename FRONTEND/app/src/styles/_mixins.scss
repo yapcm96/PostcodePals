@@ -14,12 +14,12 @@
   align-items: $ai; // centers its children on other axis (usually y)
 }
 
-@mixin box($w: 200px, $h: 100px, $br: 1px, $color: white) {
+@mixin box($w: 200px, $h: 100px, $br: 1px, $bg: white) {
   // variables start with a $, ":" gives default
   height: $h;
   width: $w;
   border-radius: $br;
-  color: $color;
+  background-color: $bg;
 }
 
 $breakpoints: (
