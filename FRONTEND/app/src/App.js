@@ -20,13 +20,9 @@ function App() {
         <Route exact path="/contact" component={ContactPage} />
         <Route exact path="/tasks/new" component={NewTaskPage} />
         <Route exact path="/tasks/:id" component={TaskPage} />
-        
-        
       </Switch>
     </div>
   );
 }
 
 export default App;
-
-

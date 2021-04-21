@@ -1,18 +1,76 @@
 import { useState, useEffect } from "react";
 
-const NewTaskForm = ({ addTask }) => {
-  const [id, setId] = useState();
-  const [task, setTask] = useState("");
-  const [type_of_task, setType_of_task] = useState("");
-  const [location, setLocation] = useState("");
-  const [estimated_duration_mins, setEstimated_duration_mins] = useState(0);
-  const [deadline, setDeadline] = useState("");
-  const [notes, setNotes] = useState("");
-  const [assigned, setAssigned] = useState(false);
-  const [completed, setCompleted] = useState(false);
-  const [task_setter, setTask_Setter] = useState("");
+const NewTaskForm = ({
+  initialTask = {
+    id: 0,
+    task: "",
+    type_of_task: "",
+    location: "",
+    estimated_duration_mins: 0,
+    deadline: "",
+    notes: "",
+    assigned: false,
+    completed: false,
+    task_setter: "",
+  },
+}) => {
+  console.log("newTaskForm: " + initialTask);
+  const [id, setId] = useState(initialTask.id);
+  const [task, setTask] = useState(initialTask.task);
+  const [type_of_task, setType_of_task] = useState(initialTask.type_of_task);
+  const [location, setLocation] = useState(initialTask.location);
+  const [estimated_duration_mins, setEstimated_duration_mins] = useState(
+    initialTask.estimated_duration_mins
+  );
+  const [deadline, setDeadline] = useState(initialTask.deadline);
+  const [notes, setNotes] = useState(initialTask.notes);
+  const [assigned, setAssigned] = useState(initialTask.assigned);
+  const [completed, setCompleted] = useState(initialTask.completed);
+  const [task_setter, setTask_Setter] = useState(initialTask.task_setter);
+
+  const addTask = async (task) => {
+    console.log(task);
+    let resBody = JSON.stringify(task);
+    console.log(resBody);
+    const res = await fetch("http://localhost:8000/tasks", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: resBody,
+    });
+  };
+
+  const updateTaskInBackend = async (task) => {
+    console.log(task);
+    let resBody = JSON.stringify(task);
+    const res = await fetch(`http://localhost:8000/tasks/${task.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: resBody,
+    });
+  };
+
+  const updateTask = (e) => {
+    console.log("updating an old task");
+    e.preventDefault();
+    updateTaskInBackend({
+      id,
+      task,
+      location,
+      estimated_duration_mins,
+      deadline,
+      notes,
+      assigned,
+      completed,
+      task_setter,
+    });
+  };
 
   const submitTask = (e) => {
+    console.log("submiting a new task");
     e.preventDefault();
 
     addTask({
@@ -36,8 +94,13 @@ const NewTaskForm = ({ addTask }) => {
     setCompleted(false);
     setTask_Setter("");
   };
+
   return (
-    <form onSubmit={submitTask}>
+    <form
+      onSubmit={
+        initialTask.task === "" ? (e) => submitTask(e) : (e) => updateTask(e)
+      }
+    >
       <label>Id</label>
       <input
         type="number"

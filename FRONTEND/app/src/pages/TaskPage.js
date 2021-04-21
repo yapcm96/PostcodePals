@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Button from "../components/Button/Button";
+import NewTaskForm from "../components/NewTaskForm/NewTaskForm";
 
 const TaskPage = (props) => {
   // pulls id from the url
@@ -7,7 +8,7 @@ const TaskPage = (props) => {
 
   // pull in the info from the database for the task with this id
   const [task, setTask] = useState({});
-  console.log(task);
+  // console.log(task);
 
   useEffect(() => {
     const fetchFromAPI = async () => {
@@ -64,8 +65,23 @@ const TaskPage = (props) => {
     });
   };
 
+  const updateTask = async () => {
+    // do PUT req here to update the server
+    console.log("update the task");
+  };
+
+  const [isEditing, setIsEditing] = useState(false);
+  if (isEditing) {
+    console.log("isEditing: " + task);
+    return <NewTaskForm initialTask={task} addTask={updateTask} />;
+  }
+
   return (
     <div>
+      {/* Could have done like this */}
+      {/* <h2>
+        Task: {isEditing ? <Textfield initialValue={task.task} /> : task.task}
+      </h2> */}
       <h2>Task: {task.task}</h2>
       <p>Type of Task: {task.type_of_task}</p>
       <p>Location: {task.location}</p>
@@ -75,7 +91,6 @@ const TaskPage = (props) => {
       <p>Assigned: {task.assigned ? "True" : "False"}</p>
       <p>Completed: {task.completed ? "True" : "False"}</p>
       <p>Task setter: {task.task_setter}</p>
-
       {task.completed && "Thanks for completing!"}
       {!task.completed && (
         <Button
@@ -88,8 +103,7 @@ const TaskPage = (props) => {
           {task.assigned ? "Mark as completed" : "Assign to me"}
         </Button>
       )}
-
-      <Button>Edit</Button>
+      <Button onClick={() => setIsEditing(true)}>Edit</Button>
       <Button>Delete</Button>
     </div>
   );
