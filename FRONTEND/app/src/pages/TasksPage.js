@@ -34,9 +34,16 @@ const TasksPage = () => {
   };
 
 
-  const filterChoiceFetch = async (locationFilter, taskTypeFilter) => {
+  const filterChoiceFetch = async (locationFilter, taskTypeFilter, sortByValue) => {
+    if (sortByValue === 'Duration') {
+      sortByValue = 'estimated_duration_mins'
+    }
+    if (sortByValue === 'Task Setter') {
+      sortByValue = 'task_setter'
+    }
+   
     let urlString = "http://localhost:8000/tasks-new?";
-    const dict = { "location": locationFilter, "type_of_task": taskTypeFilter};
+    const dict = { "location": locationFilter, "type_of_task": taskTypeFilter, "ordering": sortByValue};
     // logic to check if either of filters are empty strings
     // needs a hard refresh to change back to no filter option 
     for (let i in dict) {

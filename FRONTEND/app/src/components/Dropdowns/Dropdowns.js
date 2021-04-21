@@ -9,6 +9,8 @@ const Dropdowns = ({filterChoiceFetch}) => {
   // when location filter changes call back end with new filter:
   const [locationFilter, setLocationFilter] = useState('');
   const [taskTypeFilter, setTaskTypeFilter] = useState('');
+  const [sortByValue, setSortByValue] = useState('')
+
   const openDropdown = (index) => {
     if (index === openIndex) {
       setOpenIndex(-1);
@@ -19,7 +21,7 @@ const Dropdowns = ({filterChoiceFetch}) => {
 
    const filterSubmit = (e) => {
      e.preventDefault()
-     filterChoiceFetch(locationFilter, taskTypeFilter)
+     filterChoiceFetch(locationFilter, taskTypeFilter, sortByValue)
    }
 
 
@@ -28,16 +30,17 @@ const Dropdowns = ({filterChoiceFetch}) => {
     <div>
       <div className={style.dropdowns}>
         <Dropdown
-          options={["Location", "Type of Task", "Duration"]}
+          options={["Duration", "Task Setter"]}
           label="Sort by"
           isOpen={openIndex === 0}
           onClick={() => openDropdown(0)}
           // dropdownType={'sortby'}
+          onChange={setSortByValue}
           
         />
         <Dropdown
           options={["London", "Edinburgh", "Cardiff"]}
-          label="Location"
+          label="Location"s
           isOpen={openIndex === 1}
           onClick={() => openDropdown(1)}
 
