@@ -8,6 +8,8 @@ const TaskPage = (props) => {
 
   // pull in the info from the database for the task with this id
   const [task, setTask] = useState({});
+  const [isEditing, setIsEditing] = useState(false);
+
   // console.log(task);
 
   useEffect(() => {
@@ -17,7 +19,7 @@ const TaskPage = (props) => {
       setTask(taskFromServer);
     };
     fetchFromAPI();
-  }, [id]);
+  }, [id, isEditing]);
 
   // write fetchTask func
   const fetchTask = async (id) => {
@@ -70,10 +72,17 @@ const TaskPage = (props) => {
     console.log("update the task");
   };
 
-  const [isEditing, setIsEditing] = useState(false);
+  console.log(isEditing);
+
   if (isEditing) {
     console.log("isEditing: " + task);
-    return <NewTaskForm initialTask={task} addTask={updateTask} />;
+    return (
+      <NewTaskForm
+        initialTask={task}
+        addTask={updateTask}
+        setIsEditing={setIsEditing}
+      />
+    );
   }
 
   return (

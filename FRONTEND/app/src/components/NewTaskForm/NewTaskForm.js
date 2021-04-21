@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
+import TaskPage from "../../pages/TaskPage";
+import { useHistory } from "react-router-dom";
 
 const NewTaskForm = ({
+  isEditing,
+  setIsEditing,
   initialTask = {
     id: 0,
     task: "",
@@ -28,6 +32,9 @@ const NewTaskForm = ({
   const [completed, setCompleted] = useState(initialTask.completed);
   const [task_setter, setTask_Setter] = useState(initialTask.task_setter);
 
+  // for routing
+  const history = useHistory();
+
   const addTask = async (task) => {
     console.log(task);
     let resBody = JSON.stringify(task);
@@ -39,6 +46,7 @@ const NewTaskForm = ({
       },
       body: resBody,
     });
+    history.push(`/tasks/${task.id}`);
   };
 
   const updateTaskInBackend = async (task) => {
@@ -51,6 +59,10 @@ const NewTaskForm = ({
       },
       body: resBody,
     });
+
+    // route to the Task page with that id
+    setIsEditing(false);
+    //console.log(isEditing)
   };
 
   const updateTask = (e) => {
@@ -67,6 +79,12 @@ const NewTaskForm = ({
       completed,
       task_setter,
     });
+
+    //<TaskPage
+    // key={task.id}
+    // taskItem={task}
+    // />;
+    // history.push(`/tasks/${id}`);
   };
 
   const submitTask = (e) => {
