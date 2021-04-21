@@ -35,36 +35,31 @@ const TasksPage = () => {
     return data;
   };
 
-  const filterChoice = async (option, dropdownType) => {
-    const res = await fetch(
-      `http://localhost:8000/tasks-new?${dropdownType}=${option}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    const data = await res.json();
+  const filterChoiceFetch = async (
+    locationFilter,
+    taskTypeFilter,
+    sortByValue
+  ) => {
+    if (sortByValue === "Duration") {
+      sortByValue = "estimated_duration_mins";
+    }
+    if (sortByValue === "Task Setter") {
+      sortByValue = "task_setter";
+    }
 
-  const filterChoiceFetch = async (locationFilter, taskTypeFilter, sortByValue) => {
-    if (sortByValue === 'Duration') {
-      sortByValue = 'estimated_duration_mins'
-    }
-    if (sortByValue === 'Task Setter') {
-      sortByValue = 'task_setter'
-    }
-   
     let urlString = "http://localhost:8000/tasks-new?";
-    const dict = { "location": locationFilter, "type_of_task": taskTypeFilter, "ordering": sortByValue};
+    const dict = {
+      location: locationFilter,
+      type_of_task: taskTypeFilter,
+      ordering: sortByValue,
+    };
     // logic to check if either of filters are empty strings
-    // needs a hard refresh to change back to no filter option 
+    // needs a hard refresh to change back to no filter option
     for (let i in dict) {
-      if ( dict[i] !== "") {
-          // append the filter to the urlString
-          urlString = urlString + (`${i}=${dict[i]}&`)
-          console.log(urlString)
-          
+      if (dict[i] !== "") {
+        // append the filter to the urlString
+        urlString = urlString + `${i}=${dict[i]}&`;
+        console.log(urlString);
       }
     }
 
@@ -73,13 +68,13 @@ const TasksPage = () => {
       headers: {
         "Content-Type": "application/json",
       },
-     });
-     const data = await res.json()
+    });
+    const data = await res.json();
 
-     console.log(data)
-     setTasks(data)
-    return data
-   }
+    console.log(data);
+    setTasks(data);
+    return data;
+  };
 
   return (
     <div>
