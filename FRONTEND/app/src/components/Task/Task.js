@@ -7,6 +7,7 @@ import { GoLocation } from "react-icons/go";
 
 const Task = ({ taskItem }) => {
   const taskURL = `/tasks/${taskItem.id}`;
+  // console.log(taskItem.id)
 
   return (
     <Link to={taskURL} className={style.task}>

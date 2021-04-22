@@ -1,13 +1,14 @@
-import { useState, useEffect } from "react";
-import TaskPage from "../../pages/TaskPage";
+import { useState } from "react";
+// import TaskPage from "../../pages/TaskPage";
 import { useHistory } from "react-router-dom";
 import style from "./newtaskform.module.scss";
 
 const NewTaskForm = ({
+  id,
   isEditing,
   setIsEditing,
   initialTask = {
-    id: 0,
+    //id: 0,
     task: "",
     type_of_task: "",
     location: "",
@@ -20,7 +21,7 @@ const NewTaskForm = ({
   },
 }) => {
   console.log("newTaskForm: " + initialTask);
-  const [id, setId] = useState(initialTask.id);
+  //const [id, setId] = useState(initialTask.id);
   const [task, setTask] = useState(initialTask.task);
   const [type_of_task, setType_of_task] = useState(initialTask.type_of_task);
   const [location, setLocation] = useState(initialTask.location);
@@ -37,9 +38,9 @@ const NewTaskForm = ({
   const history = useHistory();
 
   const addTask = async (task) => {
-    console.log(task);
+    // console.log(task);
     let resBody = JSON.stringify(task);
-    console.log(resBody);
+    // console.log(resBody);
     const res = await fetch("http://localhost:8000/tasks", {
       method: "POST",
       headers: {
@@ -47,13 +48,16 @@ const NewTaskForm = ({
       },
       body: resBody,
     });
-    history.push(`/tasks/${task.id}`);
+    // await res
+    const data = await res.json()
+
+    history.push(`/tasks/${data.id}`);
   };
 
-  const updateTaskInBackend = async (task) => {
+  const updateTaskInBackend = async (id, task) => {
     console.log(task);
     let resBody = JSON.stringify(task);
-    const res = await fetch(`http://localhost:8000/tasks/${task.id}`, {
+    const res = await fetch(`http://localhost:8000/tasks/${id}`, {
       method: "PUT",
       headers: {
         "Content-type": "application/json",
@@ -69,8 +73,7 @@ const NewTaskForm = ({
   const updateTask = (e) => {
     console.log("updating an old task");
     e.preventDefault();
-    updateTaskInBackend({
-      id,
+    updateTaskInBackend(id, {
       task,
       location,
       estimated_duration_mins,
@@ -87,7 +90,7 @@ const NewTaskForm = ({
     e.preventDefault();
 
     addTask({
-      id,
+      //id,
       type_of_task,
       task,
       location,
@@ -108,7 +111,6 @@ const NewTaskForm = ({
       }
     >
       <h2>Edit task</h2>
-      
       <label>Task</label>
       <input
         type="text"
