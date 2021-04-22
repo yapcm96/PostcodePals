@@ -11,10 +11,3 @@
   }
 }
 
-.imgbox {
-  @include flex;
-  img {
-    margin: 5px;
-    width: 100%;
-  }
-}

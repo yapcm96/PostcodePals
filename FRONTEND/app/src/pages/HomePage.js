@@ -1,6 +1,23 @@
 import style from "../styles/pagesStyles/homepage.module.scss";
+import Image1 from '../assets/images/image1.jpg';
+import Image2 from '../assets/images/image2.jpg';
+import Image3 from '../assets/images/image3.jpg';
+import Flickity from 'react-flickity-component';
+import 'flickity/dist/flickity.min.css';
+
+const flickityOptions = {
+  initialIndex: 1,
+  autoPlay: 4000,
+  pauseAutoPlayOnHover: true,
+  wrapAround: true,
+  fullscreen: true,
+  adaptiveHeight: true,
+}
+
+const images = [Image1, Image2, Image3];
 
 const HomePage = () => {
+
   return (
     <div className={style.home}>
       <h1>About us</h1>
@@ -19,10 +36,24 @@ const HomePage = () => {
         We want hope to eventually build a nation-wide support platform, so that
         everyone gets the help they need.
       </p>
-      <div className={style.imgbox}>
-        <img src="https://images.unsplash.com/photo-1553531889-56cc480ac5cb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" />
-        <img src="https://images.unsplash.com/photo-1438109382753-8368e7e1e7cf?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" />
-        <img src="https://images.unsplash.com/photo-1464998857633-50e59fbf2fe6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1350&q=80" />
+      <div>
+        <Flickity
+        className={'carousel'} // default ''
+        elementType={'div'} // default 'div'
+        options={flickityOptions} // takes flickity options {}
+        disableImagesLoaded={false} // default false
+        reloadOnUpdate // default false
+        static // default false
+        >
+          {images.map((image, index) => (
+            <div style={{ width: '70%', height: '', display: 'flex'}}>
+              <div style={{ width: '100%', height: '100%', margin: '0 0.5em', overflow: 'hidden', display: 'flex' }} key={index}>
+                <img style={{  width: '1200px', height: '100%', overflow: 'auto' }}
+                src={image} alt="" />
+              </div>
+            </div>
+          ))}
+        </Flickity>  
       </div>
     </div>
   );
