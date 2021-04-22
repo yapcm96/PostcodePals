@@ -5,7 +5,7 @@ import style from "./tasks.module.scss";
 const Tasks = ({ taskList }) => {
   console.log(taskList);
   if (taskList.length === 0) {
-    return <h1>Loading...</h1>;
+    return <h1>No tasks found</h1>;
   } else {
     return (
       <div className={style.tasks}>
