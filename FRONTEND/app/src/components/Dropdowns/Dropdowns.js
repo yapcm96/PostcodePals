@@ -9,7 +9,7 @@ const Dropdowns = ({ filterChoiceFetch, clearFilterFetch }) => {
   const [locationFilter, setLocationFilter] = useState("");
   const [taskTypeFilter, setTaskTypeFilter] = useState("");
   const [sortByValue, setSortByValue] = useState("");
-
+ 
   const openDropdown = (index) => {
     if (index === openIndex) {
       setOpenIndex(-1);
@@ -23,17 +23,17 @@ const Dropdowns = ({ filterChoiceFetch, clearFilterFetch }) => {
     filterChoiceFetch(locationFilter, taskTypeFilter, sortByValue);
   };
 
-  const clearFilters = () => {
+ const clearFilters = () => {
     clearFilterFetch();
+   
     
-  }
+  } 
 
-  // console.log(locationFilter);
   return (
     <div>
       <div className={style.dropdowns}>
         <Dropdown
-          options={["Duration", "Task Setter"]}
+          options={["Order Created","Duration", "Task Setter"]}
           label="Sort by"
           isOpen={openIndex === 0}
           onClick={() => openDropdown(0)}
@@ -41,7 +41,7 @@ const Dropdowns = ({ filterChoiceFetch, clearFilterFetch }) => {
           onChange={setSortByValue}
         />
         <Dropdown
-          options={["London", "Edinburgh", "Cardiff"]}
+          options={["Any","London", "Edinburgh", "Cardiff"]}
           label="Location"
           isOpen={openIndex === 1}
           onClick={() => openDropdown(1)}
@@ -50,6 +50,7 @@ const Dropdowns = ({ filterChoiceFetch, clearFilterFetch }) => {
         />
         <Dropdown
           options={[
+            "Any",
             "Shopping",
             "Gardening",
             "Emotional Support",
@@ -66,7 +67,8 @@ const Dropdowns = ({ filterChoiceFetch, clearFilterFetch }) => {
       <Button className={style.filterTaskBtn} type="submit" onClick={filterSubmit}>
         Filter
       </Button>
-      <Button className={style.filterTaskBtn} onClick={clearFilters}>Clear Filters</Button>
+      <Button className={style.filterTaskBtn} onClick={clearFilters}>No Filters</Button>
+      
       </div>
     </div>
   );

@@ -68,12 +68,13 @@ const TasksPage = () => {
     // logic to check if either of filters are empty strings
     // needs a hard refresh to change back to no filter option
     for (let i in dict) {
-      if (dict[i] !== "") {
+      if (dict[i] !== "" && dict[i] !=="Any" && dict[i] !== "Order Created") {
         // append the filter to the urlString
         urlString = urlString + `${i}=${dict[i]}&`;
-        console.log(urlString);
+        
       }
     }
+    console.log(urlString);
 
     const res = await fetch(urlString, {
       method: "GET",

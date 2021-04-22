@@ -100,7 +100,7 @@ const NewTaskForm = ({
   const submitTask = (e) => {
     console.log("submiting a new task");
     e.preventDefault();
-
+    
     addTask({
       //id,
       type_of_task,
