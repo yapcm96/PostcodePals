@@ -1,0 +1,31 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.footer {
+  @include margin;
+  text-align: center;
+  background-color: $grey;
+  color: white;
+  padding: 50px 0;
+  margin-top: 50px;
+  p {
+    margin-top: 50px;
+  }
+  div {
+    text-align: center;
+    @include margin;
+    @include mq("tablet") {
+      @include flex($jc: space-around);
+    }
+    @include mq("desktop") {
+      width: 75%;
+    }
+    div {
+      @include flex(column);
+      width: 180px;
+      p {
+        margin-top: 10px;
+      }
+    }
+  }
+}

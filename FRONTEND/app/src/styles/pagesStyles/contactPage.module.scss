@@ -3,6 +3,7 @@
 
 .contact {
   @include margin;
+  min-height: calc(100vh - 440px);
   @include mq("tablet") {
     width: 60%;
   }
