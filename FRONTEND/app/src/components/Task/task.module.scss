@@ -11,10 +11,14 @@
   margin-bottom: 10px;
   @include mq("tablet") {
     width: 80%;
+    @include box(46%, auto, 5px, $lightColor);
+  }
+  @include mq("desktop") {
+    width: 80%;
     @include box(29%, auto, 5px, $lightColor);
   }
 
-  .summary {  
+  .summary {
     h3,
     h4 {
       padding: 5px 0;
