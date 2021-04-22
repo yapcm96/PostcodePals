@@ -18,7 +18,7 @@ const Header = () => {
           <p>80 Middlesex Street, London, E1 7EZ</p>
         </div>
       </div>
-      <p>
+      <p className={style.copyr}>
         <BiCopyright /> Copyright 2021
       </p>
     </footer>

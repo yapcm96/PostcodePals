@@ -8,14 +8,12 @@
   color: white;
   padding: 30px 0;
   margin-top: 30px;
-  p {
-    margin-top: 50px;
-  }
   div {
     text-align: center;
+    margin-top: 20px;
     @include margin;
     @include mq("tablet") {
-      @include flex($jc: space-around);
+      @include flex($jc: space-around, $ai: flex-start);
     }
     @include mq("desktop") {
       width: 75%;
@@ -24,8 +22,12 @@
       @include flex(column);
       width: 180px;
       p {
-        margin-top: 10px;
+        margin-top: 5px;
       }
     }
   }
+}
+
+.copyr {
+  margin-top: 30px;
 }
