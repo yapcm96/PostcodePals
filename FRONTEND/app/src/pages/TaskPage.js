@@ -83,6 +83,7 @@ const TaskPage = (props) => {
     console.log("isEditing: " + task);
     return (
       <NewTaskForm
+        id={id}
         initialTask={task}
         addTask={updateTask}
         setIsEditing={setIsEditing}
