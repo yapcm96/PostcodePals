@@ -18,6 +18,8 @@ const Dropdown = ({
     }
     
   };
+
+ 
   return (
     <div className={style.dropdownBtn} onClick={onClick}>
       {/* What we had before:
@@ -44,6 +46,7 @@ const Dropdown = ({
           ))}
         </div>
       )}
+  
     </div>
   );
 };
