@@ -7,11 +7,11 @@ const Header = () => {
       <div>
         <div>
           <h4>Front End Team</h4>
-          <p>Beth, Mahbub and Asel</p>
+          <p>Issy, Issy, Harriette and Johnny</p>
         </div>
         <div>
           <h4>Back End Team</h4>
-          <p>Issy, Issy, Harriette and Johnny</p>
+          <p>Beth, Mahbub and Asel</p>
         </div>
         <div>
           <h4>Address</h4>
