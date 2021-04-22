@@ -3,6 +3,7 @@
 
 .task {
   margin: 10px;
+  min-height: calc(100vh - 440px);
   @include margin;
   @include mq("tablet") {
     width: 60%;

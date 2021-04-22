@@ -18,6 +18,7 @@
 }
 
 .taskspage {
+  min-height: calc(100vh - 440px);
   @include margin;
   @include mq("desktop") {
     @include margin;

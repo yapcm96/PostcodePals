@@ -2,6 +2,7 @@ import { useState } from "react";
 // import TaskPage from "../../pages/TaskPage";
 import { useHistory } from "react-router-dom";
 import style from "./newtaskform.module.scss";
+// import Dropdown from '../Dropdown/Dropdown'
 
 const NewTaskForm = ({
   id,
@@ -73,8 +74,14 @@ const NewTaskForm = ({
   const updateTask = (e) => {
     console.log("updating an old task");
     e.preventDefault();
+    if ( task === "" || location === "" || deadline === "" || task_setter === "") {
+      alert('Please make sure all fields are complete')
+    }
+    else {
+
     updateTaskInBackend(id, {
       task,
+      type_of_task,
       location,
       estimated_duration_mins,
       deadline,
@@ -82,14 +89,18 @@ const NewTaskForm = ({
       assigned,
       completed,
       task_setter,
-    });
+    })};
   };
 
   const submitTask = (e) => {
     console.log("submiting a new task");
     e.preventDefault();
-
-    addTask({
+    if (type_of_task === "" || task === "" || location === "" || deadline === "" || task_setter === "") {
+      alert('Please make sure all fields are complete')
+    }
+    
+    else {
+      addTask({
       //id,
       type_of_task,
       task,
@@ -100,7 +111,7 @@ const NewTaskForm = ({
       assigned,
       completed,
       task_setter,
-    });
+    })};
   };
 
   return (
@@ -118,13 +129,30 @@ const NewTaskForm = ({
         value={task}
         onChange={(e) => setTask(e.target.value)}
       />
-      <label>Type of Task</label>
+     {/* <label>Type of Task</label>
       <input
         type="text"
         name="type_of_task"
         value={type_of_task}
         onChange={(e) => setType_of_task(e.target.value)}
-      />
+      /> */}
+      {/* <Dropdown
+          options={["Household tasks", "Gardening", "Shopping", "Emotional support", "Other"]}
+          label="Type of task"
+          isOpen={openIndex === 1}
+          onClick={() => openDropdown(1)}
+          onChange={setType_of_task}
+      /> */}
+      <label for="types">Type of task</label>
+      <select name="types" onChange={(e) => {
+          setType_of_task(e.target.value)}}>
+          <option selected disabled hidden>Choose here</option>
+          <option >Household</option>
+          <option >Gardening</option>
+          <option>Emotional Support</option>
+          <option>Shopping</option>
+          <option>Other</option>
+      </select>
       <label>Location</label>
       <input
         type="text"
