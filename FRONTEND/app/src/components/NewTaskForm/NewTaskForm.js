@@ -111,13 +111,6 @@ const NewTaskForm = ({
       }
     >
       <h2>Edit task</h2>
-{/*       <label>Id</label>
-      <input
-        type="number"
-        name="id"
-        value={id}
-        onChange={(e) => setId(e.target.value)}
-      /> */}
       <label>Task</label>
       <input
         type="text"
