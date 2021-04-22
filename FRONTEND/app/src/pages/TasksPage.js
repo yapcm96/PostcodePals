@@ -88,7 +88,6 @@ const TasksPage = () => {
 
   return (
     <div>
-      <h1>Tasks</h1>
       <Dropdowns filterChoiceFetch={filterChoiceFetch} clearFilterFetch= {clearFilterFetch} />
       <Button className={style.addTaskBtn} linkTo="/tasks/new">
         <MdAddCircle />
