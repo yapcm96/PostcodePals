@@ -6,7 +6,8 @@
   @include margin;
   display: block;
   padding: 10px;
-  margin: 10px 0;
+  margin-top: 10px;
+  margin-bottom: 10px;
   @include mq("tablet") {
     width: 80%;
     @include box(28%, auto, 5px, $lightColor);
