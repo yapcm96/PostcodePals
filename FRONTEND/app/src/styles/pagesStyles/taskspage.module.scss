@@ -16,3 +16,11 @@
 .addTaskBtn:hover {
   background-color: lighten($color: $accentLight, $amount: 5);
 }
+
+.taskspage {
+  @include margin;
+  @include mq("desktop") {
+    @include margin;
+    width: 75%;
+  }
+}

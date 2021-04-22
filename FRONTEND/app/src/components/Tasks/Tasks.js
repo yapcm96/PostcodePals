@@ -1,5 +1,6 @@
 import React from "react";
 import Task from "../Task/Task";
+import style from "./tasks.module.scss";
 
 const Tasks = ({ taskList }) => {
   console.log(taskList);
@@ -7,11 +8,11 @@ const Tasks = ({ taskList }) => {
     return <h1>Loading...</h1>;
   } else {
     return (
-      <>
+      <div className={style.tasks}>
         {taskList.map((task) => (
           <Task key={task.id} taskItem={task} />
         ))}
-      </>
+      </div>
     );
   }
 };

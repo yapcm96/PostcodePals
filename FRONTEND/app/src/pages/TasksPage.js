@@ -77,7 +77,7 @@ const TasksPage = () => {
   };
 
   return (
-    <div>
+    <div className={style.taskspage}>
       <Dropdowns filterChoiceFetch={filterChoiceFetch} />
       <Button className={style.addTaskBtn} linkTo="/tasks/new">
         <MdAddCircle />

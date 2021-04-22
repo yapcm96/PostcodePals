@@ -5,7 +5,11 @@
   margin: 10px;
   @include margin;
   @include mq("tablet") {
-    width: 80%;
+    width: 60%;
+  }
+  @include mq("desktop") {
+    @include margin;
+    width: 50%;
   }
   h2 {
     margin: 30px 10px;
