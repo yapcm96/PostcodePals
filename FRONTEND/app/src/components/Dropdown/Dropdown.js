@@ -8,17 +8,15 @@ const Dropdown = ({
   isOpen,
   onClick,
   onChange,
-  filterChoice,
-  dropdownType,
 }) => {
   const [selected, setSelected] = useState(label);
-  const stateChanged = (option, dropdownType) => {
+  const stateChanged = (option) => {
     setSelected(option);
     // incase we want an onChange function later:
     if (onChange) {
       onChange(option);
     }
-    // filterChoice(option, dropdownType)
+    
   };
   return (
     <div className={style.dropdownBtn} onClick={onClick}>
@@ -38,7 +36,7 @@ const Dropdown = ({
             <div
               className={style.dropdownItem}
               key={option}
-              onClick={() => stateChanged(option, dropdownType)}
+              onClick={() => stateChanged(option)}
               value={selected}
             >
               {option}

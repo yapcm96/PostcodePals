@@ -35,6 +35,18 @@ const TasksPage = () => {
     return data;
   };
 
+  const clearFilterFetch = async () => {
+    const res = await fetch(`http://localhost:8000/tasks`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await res.json();
+    setTasks(data);
+    return data;
+  };
+
   const filterChoiceFetch = async (
     locationFilter,
     taskTypeFilter,
@@ -70,15 +82,16 @@ const TasksPage = () => {
       },
     });
     const data = await res.json();
-
-    console.log(data);
     setTasks(data);
     return data;
   };
 
   return (
     <div className={style.taskspage}>
-      <Dropdowns filterChoiceFetch={filterChoiceFetch} />
+      <Dropdowns
+        filterChoiceFetch={filterChoiceFetch}
+        clearFilterFetch={clearFilterFetch}
+      />
       <Button className={style.addTaskBtn} linkTo="/tasks/new">
         <MdAddCircle />
         <span>Add Task</span>
