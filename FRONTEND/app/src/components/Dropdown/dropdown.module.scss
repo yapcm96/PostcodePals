@@ -25,9 +25,10 @@
   color: white;
   top: 50px;
   overflow: hidden;
-  // border-radius: 8px;
+  border-radius: 8px;
   box-shadow: 0 5px 5px 2px rgba(0, 0, 0, 0.1);
   width: 100%;
+  background-color: $midColor;
 }
 
 .dropdownItem {
