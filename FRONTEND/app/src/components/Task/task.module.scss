@@ -2,13 +2,13 @@
 @import "../../styles/mixins";
 
 .task {
-  @include flex($jc: space-between, $ai: flex-start);
-
-  @include box(calc(100% - 40px), auto, 5px, $lightColor);
-  @include margin;
   padding: 10px;
   margin-top: 10px;
   margin-bottom: 10px;
+  transition: background-color 200ms ease-in-out;
+  @include flex($jc: space-between, $ai: flex-start);
+  @include box(calc(100% - 40px), auto, 5px, $lightColor);
+  @include margin;
   @include mq("tablet") {
     width: 80%;
     @include box(46%, auto, 5px, $lightColor);
@@ -53,4 +53,9 @@
     padding: 5px;
     text-align: center;
   }
+}
+
+.task:hover {
+  background-color: darken($color: $lightColor, $amount: 5);
+  text-decoration: none;
 }
