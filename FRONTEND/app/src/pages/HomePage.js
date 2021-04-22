@@ -1,9 +1,9 @@
 import style from "../styles/pagesStyles/homepage.module.scss";
-import Image1 from '../assets/images/image1.jpg';
-import Image2 from '../assets/images/image2.jpg';
-import Image3 from '../assets/images/image3.jpg';
-import Flickity from 'react-flickity-component';
-import 'flickity/dist/flickity.min.css';
+import Image1 from "../assets/images/image1.jpg";
+import Image2 from "../assets/images/image2.jpg";
+import Image3 from "../assets/images/image3.jpg";
+import Flickity from "react-flickity-component";
+import "flickity/dist/flickity.min.css";
 
 const flickityOptions = {
   initialIndex: 1,
@@ -12,12 +12,11 @@ const flickityOptions = {
   wrapAround: true,
   fullscreen: true,
   adaptiveHeight: true,
-}
+};
 
 const images = [Image1, Image2, Image3];
 
 const HomePage = () => {
-
   return (
     <div className={style.home}>
       <h1>About us</h1>
@@ -38,22 +37,34 @@ const HomePage = () => {
       </p>
       <div>
         <Flickity
-        className={'carousel'} // default ''
-        elementType={'div'} // default 'div'
-        options={flickityOptions} // takes flickity options {}
-        disableImagesLoaded={false} // default false
-        reloadOnUpdate // default false
-        static // default false
+          className={"carousel"} // default ''
+          elementType={"div"} // default 'div'
+          options={flickityOptions} // takes flickity options {}
+          disableImagesLoaded={false} // default false
+          reloadOnUpdate // default false
+          static // default false
         >
           {images.map((image, index) => (
-            <div style={{ width: '70%', height: '', display: 'flex'}}>
-              <div style={{ width: '100%', height: '100%', margin: '0 0.5em', overflow: 'hidden', display: 'flex' }} key={index}>
-                <img style={{  width: '1200px', height: '100%', overflow: 'auto' }}
-                src={image} alt="" />
+            <div style={{ width: "70%", height: "", display: "flex" }}>
+              <div
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  margin: "0 0.5em",
+                  overflow: "hidden",
+                  display: "flex",
+                }}
+                key={index}
+              >
+                <img
+                  style={{ width: "1200px", height: "100%", overflow: "auto" }}
+                  src={image}
+                  alt=""
+                />
               </div>
             </div>
           ))}
-        </Flickity>  
+        </Flickity>
       </div>
     </div>
   );
