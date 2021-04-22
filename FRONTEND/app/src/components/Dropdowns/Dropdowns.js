@@ -40,7 +40,14 @@ const Dropdowns = ({ filterChoiceFetch, clearFilterFetch }) => {
           onChange={setSortByValue}
         />
         <Dropdown
-          options={["Any", "London", "Edinburgh", "Cardiff"]}
+          options={[
+            "Any",
+            "London",
+            "Liverpool",
+            "Manchester",
+            "Edinburgh",
+            "Cardiff",
+          ]}
           label="Location"
           isOpen={openIndex === 1}
           setOpenIndex={setOpenIndex}
