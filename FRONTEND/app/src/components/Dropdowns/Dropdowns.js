@@ -61,10 +61,12 @@ const Dropdowns = ({ filterChoiceFetch, clearFilterFetch }) => {
           onChange={setTaskTypeFilter}
         />
       </div>
-      <Button type="submit" onClick={filterSubmit}>
+      <div className={style.filterButtons}>
+      <Button className={style.filterTaskBtn} type="submit" onClick={filterSubmit}>
         Filter
       </Button>
-      <Button onClick={clearFilters}>Clear Filters</Button>
+      <Button className={style.filterTaskBtn} onClick={clearFilters}>Clear Filters</Button>
+      </div>
     </div>
   );
 };
