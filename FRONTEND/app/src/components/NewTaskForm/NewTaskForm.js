@@ -74,7 +74,7 @@ const NewTaskForm = ({
   const updateTask = (e) => {
     console.log("updating an old task");
     e.preventDefault();
-    if ( task === "" || location === "" || deadline === "" || task_setter === "") {
+    if ( task === "" || deadline === "" || task_setter === "") {
       alert('Please make sure all fields are complete')
     }
     else {
@@ -153,13 +153,24 @@ const NewTaskForm = ({
           <option>Shopping</option>
           <option>Other</option>
       </select>
+        
       <label>Location</label>
+        <select name="locations" onChange={(e) => {
+          setLocation(e.target.value)}}>
+          <option selected disabled hidden>Choose the nearest city</option>
+          <option >London</option>
+          <option >Liverpool</option>
+          <option>Manchester</option>
+          <option>Edinburgh</option>
+          <option>Cardiff</option>
+      </select>
+      {/*}
       <input
         type="text"
         name="location"
         value={location}
         onChange={(e) => setLocation(e.target.value)}
-      />
+      /> */}
       <label>Estimated duration (minutes)</label>
       <input
         type="number"
