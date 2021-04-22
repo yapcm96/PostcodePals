@@ -10,6 +10,7 @@ const Dropdowns = ({ filterChoiceFetch, clearFilterFetch }) => {
   const [taskTypeFilter, setTaskTypeFilter] = useState("");
   const [sortByValue, setSortByValue] = useState("");
   const [assignedBool, setAssignedBool] = useState("");
+  const [completedBool, setCompletedBool] = useState("");
   const openDropdown = (index) => {
     if (index === openIndex) {
       setOpenIndex(-1);
@@ -20,7 +21,7 @@ const Dropdowns = ({ filterChoiceFetch, clearFilterFetch }) => {
 
   const filterSubmit = (e) => {
     e.preventDefault();
-    filterChoiceFetch(locationFilter, taskTypeFilter, sortByValue,assignedBool);
+    filterChoiceFetch(locationFilter, taskTypeFilter, sortByValue,assignedBool,completedBool);
   };
 
  const clearFilters = () => {
@@ -64,13 +65,25 @@ const Dropdowns = ({ filterChoiceFetch, clearFilterFetch }) => {
         />
           <Dropdown
           options={[
-            "Unassigned",
-            "Assigned"
+            "Any",
+            "Assigned",
+            "Not Assigned"
           ]}
-          label="Assigned"
+          label="Assigned Status"
           isOpen={openIndex === 3}
           onClick={() => openDropdown(3)}
           onChange={setAssignedBool}
+        />
+                  <Dropdown
+          options={[
+            "Any",
+            "Completed",
+            "Not Completed"
+          ]}
+          label="Completed status"
+          isOpen={openIndex === 4}
+          onClick={() => openDropdown(4)}
+          onChange={setCompletedBool}
         />
       </div>
 

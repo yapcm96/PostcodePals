@@ -51,7 +51,8 @@ const TasksPage = () => {
     locationFilter,
     taskTypeFilter,
     sortByValue,
-    assignedBool
+    assignedBool,
+    completedBool
   ) => {
     //const assignedBoolean;
     if (sortByValue === "Duration") {
@@ -63,8 +64,14 @@ const TasksPage = () => {
     if (assignedBool === "Assigned"){
       assignedBool = "true"
     }
-    if (assignedBool === "Unassigned"){
+    if (assignedBool === "Not Assigned"){
       assignedBool = "false"
+    }
+    if (completedBool === "Completed"){
+      completedBool = "true"
+    }
+    if (completedBool === "Not Completed"){
+      completedBool = "false"
     }
 
     let urlString = "http://localhost:8000/tasks-new?";
@@ -72,7 +79,8 @@ const TasksPage = () => {
       location: locationFilter,
       type_of_task: taskTypeFilter,
       ordering: sortByValue,
-      assigned: assignedBool
+      assigned: assignedBool,
+      completed: completedBool
     };
     // logic to check if either of filters are empty strings
     // needs a hard refresh to change back to no filter option
