@@ -58,7 +58,7 @@ const NewTaskForm = ({
   const updateTaskInBackend = async (id, task) => {
     console.log(task);
     let resBody = JSON.stringify(task);
-    await fetch(`http://localhost:8000/tasks/${id}`, {
+    const res = await fetch(`http://localhost:8000/tasks/${id}`, {
       method: "PUT",
       headers: {
         "Content-type": "application/json",
@@ -90,8 +90,12 @@ const NewTaskForm = ({
   const submitTask = (e) => {
     console.log("submiting a new task");
     e.preventDefault();
+    if (type_of_task === "" || task === "" || location === "" || deadline === "" || task_setter === "") {
+      alert('Please make sure all fields are complete')
+    }
     
-    addTask({
+    else {
+      addTask({
       //id,
       type_of_task,
       task,
@@ -102,7 +106,7 @@ const NewTaskForm = ({
       assigned,
       completed,
       task_setter,
-    });
+    })};
   };
 
   return (
@@ -135,8 +139,9 @@ const NewTaskForm = ({
           onChange={setType_of_task}
       /> */}
       <label for="types">Type of task</label>
-      <select name="types" value={type_of_task} onChange={(e) => {
+      <select name="types" onChange={(e) => {
           setType_of_task(e.target.value)}}>
+          <option selected disabled hidden>Choose here</option>
           <option >Household</option>
           <option >Gardening</option>
           <option>Emotional Support</option>
