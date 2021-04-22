@@ -4,6 +4,9 @@
 .NewTaskForm {
   @include margin;
   width: calc(100% - 20px);
+  @include mq("tablet") {
+    width: 60%;
+  }
 
   h2 {
     margin: 20px 0;
