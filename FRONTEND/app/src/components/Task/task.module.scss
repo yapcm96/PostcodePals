@@ -9,6 +9,8 @@
   @include flex($jc: space-between, $ai: flex-start);
   @include box(calc(100% - 40px), auto, 5px, $lightColor);
   @include margin;
+  opacity: 0;
+  transform: translate3d(-5px, -5px, 0);
   @include mq("tablet") {
     width: 80%;
     @include box(46%, auto, 5px, $lightColor);
@@ -57,6 +59,10 @@
     text-align: center;
     flex: 1;
   }
+}
+.show {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
 }
 
 .task:hover {

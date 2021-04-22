@@ -9,6 +9,7 @@ import { MdAddCircle } from "react-icons/md";
 
 const TasksPage = () => {
   const [tasks, setTasks] = useState([]);
+  const [fetched, setFetched] = useState(false);
   console.log(tasks);
 
   // when the page loads
@@ -16,7 +17,7 @@ const TasksPage = () => {
   useEffect(() => {
     const fetchFromAPI = async () => {
       const tasksFromServer = await fetchTasks();
-
+      setFetched(true);
       setTasks(tasksFromServer);
     };
     fetchFromAPI();
@@ -31,7 +32,7 @@ const TasksPage = () => {
       },
     });
     const data = await res.json();
-
+    setFetched(true);
     return data;
   };
 
@@ -53,8 +54,6 @@ const TasksPage = () => {
     sortByValue,
     StatusFilter
   ) => {
-    
-    
     if (sortByValue === "Duration") {
       sortByValue = "estimated_duration_mins";
     }
@@ -67,21 +66,20 @@ const TasksPage = () => {
     if (StatusFilter === "Assigned") {
       StatusFilter = "true";
     }
-  
+
     let urlString = "http://localhost:8000/tasks-new?";
     const dict = {
       location: locationFilter,
       type_of_task: taskTypeFilter,
       ordering: sortByValue,
-      assigned: StatusFilter
+      assigned: StatusFilter,
     };
     // logic to check if either of filters are empty strings
     // needs a hard refresh to change back to no filter option
     for (let i in dict) {
-      if (dict[i] !== "" && dict[i] !=="Any" && dict[i] !== "Order Created") {
+      if (dict[i] !== "" && dict[i] !== "Any" && dict[i] !== "Order Created") {
         // append the filter to the urlString
         urlString = urlString + `${i}=${dict[i]}&`;
-        
       }
     }
     console.log(urlString);
@@ -107,7 +105,7 @@ const TasksPage = () => {
         <MdAddCircle />
         <span>Add Task</span>
       </Button>
-      <Tasks taskList={tasks} />
+      <Tasks fetched={fetched} taskList={tasks} />
     </div>
   );
 };
