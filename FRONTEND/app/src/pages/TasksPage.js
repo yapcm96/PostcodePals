@@ -50,13 +50,21 @@ const TasksPage = () => {
   const filterChoiceFetch = async (
     locationFilter,
     taskTypeFilter,
-    sortByValue
+    sortByValue,
+    assignedBool
   ) => {
+    //const assignedBoolean;
     if (sortByValue === "Duration") {
       sortByValue = "estimated_duration_mins";
     }
     if (sortByValue === "Task Setter") {
       sortByValue = "task_setter";
+    }
+    if (assignedBool === "Assigned"){
+      assignedBool = "true"
+    }
+    if (assignedBool === "Unassigned"){
+      assignedBool = "false"
     }
 
     let urlString = "http://localhost:8000/tasks-new?";
@@ -64,6 +72,7 @@ const TasksPage = () => {
       location: locationFilter,
       type_of_task: taskTypeFilter,
       ordering: sortByValue,
+      assigned: assignedBool
     };
     // logic to check if either of filters are empty strings
     // needs a hard refresh to change back to no filter option

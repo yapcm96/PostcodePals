@@ -9,7 +9,7 @@ const Dropdowns = ({ filterChoiceFetch, clearFilterFetch }) => {
   const [locationFilter, setLocationFilter] = useState("");
   const [taskTypeFilter, setTaskTypeFilter] = useState("");
   const [sortByValue, setSortByValue] = useState("");
- 
+  const [assignedBool, setAssignedBool] = useState("");
   const openDropdown = (index) => {
     if (index === openIndex) {
       setOpenIndex(-1);
@@ -20,7 +20,7 @@ const Dropdowns = ({ filterChoiceFetch, clearFilterFetch }) => {
 
   const filterSubmit = (e) => {
     e.preventDefault();
-    filterChoiceFetch(locationFilter, taskTypeFilter, sortByValue);
+    filterChoiceFetch(locationFilter, taskTypeFilter, sortByValue,assignedBool);
   };
 
  const clearFilters = () => {
@@ -62,7 +62,20 @@ const Dropdowns = ({ filterChoiceFetch, clearFilterFetch }) => {
           onClick={() => openDropdown(2)}
           onChange={setTaskTypeFilter}
         />
+          <Dropdown
+          options={[
+            "Unassigned",
+            "Assigned"
+          ]}
+          label="Assigned"
+          isOpen={openIndex === 3}
+          onClick={() => openDropdown(3)}
+          onChange={setAssignedBool}
+        />
       </div>
+
+      
+      
       <div className={style.filterButtons}>
       <Button className={style.filterTaskBtn} type="submit" onClick={filterSubmit}>
         Filter
