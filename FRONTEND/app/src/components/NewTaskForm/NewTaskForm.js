@@ -74,6 +74,11 @@ const NewTaskForm = ({
   const updateTask = (e) => {
     console.log("updating an old task");
     e.preventDefault();
+    if ( task === "" || location === "" || deadline === "" || task_setter === "") {
+      alert('Please make sure all fields are complete')
+    }
+    else {
+
     updateTaskInBackend(id, {
       task,
       type_of_task,
@@ -84,7 +89,7 @@ const NewTaskForm = ({
       assigned,
       completed,
       task_setter,
-    });
+    })};
   };
 
   const submitTask = (e) => {
