@@ -3,7 +3,7 @@ import style from "./dropdowns.module.scss";
 import { useState } from "react";
 import Button from "../Button/Button";
 
-const Dropdowns = ({ filterChoiceFetch }) => {
+const Dropdowns = ({ filterChoiceFetch, clearFilterFetch }) => {
   const [openIndex, setOpenIndex] = useState();
   // when location filter changes call back end with new filter:
   const [locationFilter, setLocationFilter] = useState("");
@@ -23,6 +23,11 @@ const Dropdowns = ({ filterChoiceFetch }) => {
     filterChoiceFetch(locationFilter, taskTypeFilter, sortByValue);
   };
 
+  const clearFilters = () => {
+    clearFilterFetch();
+    
+  }
+
   // console.log(locationFilter);
   return (
     <div>
@@ -38,7 +43,6 @@ const Dropdowns = ({ filterChoiceFetch }) => {
         <Dropdown
           options={["London", "Edinburgh", "Cardiff"]}
           label="Location"
-          s
           isOpen={openIndex === 1}
           onClick={() => openDropdown(1)}
           // this is built into all forms in HTML (and ours)
@@ -60,6 +64,7 @@ const Dropdowns = ({ filterChoiceFetch }) => {
       <Button type="submit" onClick={filterSubmit}>
         Filter
       </Button>
+      <Button onClick={clearFilters}>Clear Filters</Button>
     </div>
   );
 };
