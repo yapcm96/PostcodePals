@@ -38,16 +38,6 @@ const NewTaskForm = ({
   // for routing
   const history = useHistory();
 
-  // for dropdown
-  const [openIndex, setOpenIndex] = useState();
-  const openDropdown = (index) => {
-    if (index === openIndex) {
-      setOpenIndex(-1);
-    } else {
-      setOpenIndex(index);
-    }
-  };
-
   const addTask = async (task) => {
     // console.log(task);
     let resBody = JSON.stringify(task);
@@ -68,7 +58,7 @@ const NewTaskForm = ({
   const updateTaskInBackend = async (id, task) => {
     console.log(task);
     let resBody = JSON.stringify(task);
-    const res = await fetch(`http://localhost:8000/tasks/${id}`, {
+    await fetch(`http://localhost:8000/tasks/${id}`, {
       method: "PUT",
       headers: {
         "Content-type": "application/json",
@@ -152,7 +142,6 @@ const NewTaskForm = ({
           <option>Emotional Support</option>
           <option>Shopping</option>
           <option>Other</option>
-          
       </select>
       <label>Location</label>
       <input
