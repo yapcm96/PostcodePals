@@ -54,6 +54,7 @@ const Dropdowns = ({ filterChoiceFetch, clearFilterFetch }) => {
             "Gardening",
             "Emotional Support",
             "Household Tasks",
+            "Other"
           ]}
           label="Type"
           isOpen={openIndex === 2}
