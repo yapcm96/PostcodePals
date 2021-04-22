@@ -20,7 +20,7 @@
     color: $grey;
   }
 
-  input {
+  input, select {
     width: calc(100% - 20px);
     padding: 10px;
     margin-bottom: 20px;
@@ -51,3 +51,4 @@
     }
   }
 }
+
