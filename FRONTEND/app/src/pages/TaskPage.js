@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useHistory } from 'react-router-dom'
 import Button from "../components/Button/Button";
 import NewTaskForm from "../components/NewTaskForm/NewTaskForm";
 import style from "../styles/pagesStyles/taskpage.module.scss";
@@ -10,6 +11,9 @@ const TaskPage = (props) => {
   // pull in the info from the database for the task with this id
   const [task, setTask] = useState({});
   const [isEditing, setIsEditing] = useState(false);
+  const [clickedOnDelete, setClickedOnDelete] = useState(false)
+  const history = useHistory();
+
 
   // console.log(task);
 
@@ -79,11 +83,20 @@ const TaskPage = (props) => {
     console.log("isEditing: " + task);
     return (
       <NewTaskForm
+        id={id}
         initialTask={task}
         addTask={updateTask}
         setIsEditing={setIsEditing}
       />
     );
+  }
+
+  const wantsToDelete = async (id) => {
+    const res = await fetch(`http://localhost:8000/tasks/${id}`, {
+      method: "DELETE",
+    })
+    history.push('/tasks')
+
   }
 
   return (
@@ -103,8 +116,9 @@ const TaskPage = (props) => {
       <p>Assigned: {task.assigned ? "True" : "False"}</p>
       <p>Completed: {task.completed ? "True" : "False"}</p>
       <p>Task setter: {task.task_setter}</p>
+
       <div>
-        {task.completed && <p>This task has completed!</p>}
+        {clickedOnDelete ? '' : <> {task.completed && <p>This task has completed!</p>}
         {!task.completed && (
           <Button
             onClick={
@@ -114,10 +128,15 @@ const TaskPage = (props) => {
             }
           >
             {task.assigned ? "Mark as completed" : "Assign to me"}
-          </Button>
-        )}
+          </Button> 
+        )} 
         <Button onClick={() => setIsEditing(true)}>Edit</Button>
-        <Button>Delete</Button>
+        </> }
+        
+        {clickedOnDelete ? <><p>Are you sure you want to delete task '{task.task}'''</p> 
+                        <Button onClick={()=> wantsToDelete(task.id)}>Yes</Button>
+                        <Button onClick={() => setClickedOnDelete(false)}>No</Button></> : 
+                        <Button onClick={()=> setClickedOnDelete(true)}>Delete</Button>}
       </div>
     </div>
   );

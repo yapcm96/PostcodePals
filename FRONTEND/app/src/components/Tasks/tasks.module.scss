@@ -1,0 +1,10 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.tasks {
+  @include mq("tablet") {
+    @include flex($jc: space-between);
+    margin: 0 10px;
+    flex-wrap: wrap;
+  }
+}

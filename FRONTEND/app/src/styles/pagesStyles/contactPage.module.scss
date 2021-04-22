@@ -2,6 +2,14 @@
 @import "../mixins";
 
 .contact {
+  @include margin;
+  @include mq("tablet") {
+    width: 60%;
+  }
+  @include mq("desktop") {
+    @include margin;
+    width: 50%;
+  }
   h3 {
     margin: 30px 10px;
   }

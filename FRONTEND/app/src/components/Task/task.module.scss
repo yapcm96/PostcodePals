@@ -6,7 +6,11 @@
   @include margin;
   display: block;
   padding: 10px;
-  margin-bottom: 20px;
+  margin: 10px 0;
+  @include mq("tablet") {
+    width: 80%;
+    @include box(28%, auto, 5px, $lightColor);
+  }
   h3,
   h4 {
     padding: 5px 0;

@@ -3,11 +3,19 @@
 
 .task {
   margin: 10px;
+  @include margin;
+  @include mq("tablet") {
+    width: 60%;
+  }
+  @include mq("desktop") {
+    @include margin;
+    width: 50%;
+  }
   h2 {
-    margin: 30px 0;
+    margin: 30px 10px;
   }
   p {
-    margin: 20px 0;
+    margin: 20px 10px;
   }
   div {
     @include flex;

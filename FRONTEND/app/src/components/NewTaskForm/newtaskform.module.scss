@@ -4,6 +4,13 @@
 .NewTaskForm {
   @include margin;
   width: calc(100% - 20px);
+  @include mq("tablet") {
+    width: 60%;
+  }
+  @include mq("desktop") {
+    @include margin;
+    width: 50%;
+  }
 
   h2 {
     margin: 20px 0;
@@ -37,6 +44,7 @@
     margin-bottom: 20px;
     span {
       @include flex;
+      width: 130px;
     }
     input {
       margin: 0 10px;
