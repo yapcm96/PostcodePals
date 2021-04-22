@@ -1,5 +1,5 @@
 import style from "./dropdown.module.scss";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { FaCaretDown } from "react-icons/fa";
 
 const Dropdown = ({
@@ -8,45 +8,48 @@ const Dropdown = ({
   isOpen,
   onClick,
   onChange,
+  setOpenIndex,
 }) => {
+  const ref = useRef();
   const [selected, setSelected] = useState(label);
+  useEffect(() => {
+    const pageClickEvent = (e) => {
+      if (ref.current !== null && !ref.current.contains(e.target)) {
+        setOpenIndex(-1);
+      }
+    };
+    if (isOpen) {
+      window.addEventListener("click", pageClickEvent);
+    }
+    return () => {
+      window.removeEventListener("click", pageClickEvent);
+    };
+  }, [isOpen]);
   const stateChanged = (option) => {
     setSelected(option);
-    // incase we want an onChange function later:
     if (onChange) {
       onChange(option);
     }
-    
   };
 
- 
   return (
     <div className={style.dropdownBtn} onClick={onClick}>
-      {/* What we had before:
-      <label>{label}</label>
-      <select>
-        {options.map((option) => (
-          <option key={option}>{option}</option>
-        ))}
-      </select> */}
       <p className={style.label}>
         {selected} <FaCaretDown />
       </p>
-      {isOpen && (
-        <div className={style.dropdown}>
-          {options.map((option) => (
-            <div
-              className={style.dropdownItem}
-              key={option}
-              onClick={() => stateChanged(option)}
-              value={selected}
-            >
-              {option}
-            </div>
-          ))}
-        </div>
-      )}
-  
+
+      <div ref={ref} className={`${style.dropdown} ${isOpen && style.open}`}>
+        {options.map((option) => (
+          <div
+            className={style.dropdownItem}
+            key={option}
+            onClick={() => stateChanged(option)}
+            value={selected}
+          >
+            {option}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

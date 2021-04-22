@@ -9,7 +9,7 @@ const Dropdowns = ({ filterChoiceFetch, clearFilterFetch }) => {
   const [locationFilter, setLocationFilter] = useState("");
   const [taskTypeFilter, setTaskTypeFilter] = useState("");
   const [sortByValue, setSortByValue] = useState("");
- 
+
   const openDropdown = (index) => {
     if (index === openIndex) {
       setOpenIndex(-1);
@@ -23,27 +23,27 @@ const Dropdowns = ({ filterChoiceFetch, clearFilterFetch }) => {
     filterChoiceFetch(locationFilter, taskTypeFilter, sortByValue);
   };
 
- const clearFilters = () => {
+  const clearFilters = () => {
     clearFilterFetch();
-   
-    
-  } 
+  };
 
   return (
     <div>
       <div className={style.dropdowns}>
         <Dropdown
-          options={["Order Created","Duration", "Task Setter"]}
+          options={["Order Created", "Duration", "Task Setter"]}
           label="Sort by"
           isOpen={openIndex === 0}
           onClick={() => openDropdown(0)}
+          setOpenIndex={setOpenIndex}
           // dropdownType={'sortby'}
           onChange={setSortByValue}
         />
         <Dropdown
-          options={["Any","London", "Edinburgh", "Cardiff"]}
+          options={["Any", "London", "Edinburgh", "Cardiff"]}
           label="Location"
           isOpen={openIndex === 1}
+          setOpenIndex={setOpenIndex}
           onClick={() => openDropdown(1)}
           // this is built into all forms in HTML (and ours)
           onChange={setLocationFilter}
@@ -55,8 +55,9 @@ const Dropdowns = ({ filterChoiceFetch, clearFilterFetch }) => {
             "Gardening",
             "Emotional Support",
             "Household Tasks",
-            "Other"
+            "Other",
           ]}
+          setOpenIndex={setOpenIndex}
           label="Type"
           isOpen={openIndex === 2}
           onClick={() => openDropdown(2)}
@@ -64,11 +65,16 @@ const Dropdowns = ({ filterChoiceFetch, clearFilterFetch }) => {
         />
       </div>
       <div className={style.filterButtons}>
-      <Button className={style.filterTaskBtn} type="submit" onClick={filterSubmit}>
-        Filter
-      </Button>
-      <Button className={style.filterTaskBtn} onClick={clearFilters}>No Filters</Button>
-      
+        <Button
+          className={style.filterTaskBtn}
+          type="submit"
+          onClick={filterSubmit}
+        >
+          Filter
+        </Button>
+        <Button className={style.filterTaskBtn} onClick={clearFilters}>
+          No Filters
+        </Button>
       </div>
     </div>
   );

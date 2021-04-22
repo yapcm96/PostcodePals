@@ -3,6 +3,7 @@
 
 .btn {
   @include flex;
+  cursor: pointer;
   background-color: $midColor;
   padding: 5px;
   border: none;
