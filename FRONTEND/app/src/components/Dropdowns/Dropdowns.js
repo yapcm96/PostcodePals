@@ -3,7 +3,7 @@ import style from "./dropdowns.module.scss";
 import { useState } from "react";
 import Button from "../Button/Button";
 
-const Dropdowns = ({ filterChoiceFetch }) => {
+const Dropdowns = ({ filterChoiceFetch, clearFilterFetch }) => {
   const [openIndex, setOpenIndex] = useState();
   // when location filter changes call back end with new filter:
   const [locationFilter, setLocationFilter] = useState("");
@@ -22,6 +22,10 @@ const Dropdowns = ({ filterChoiceFetch }) => {
     e.preventDefault();
     filterChoiceFetch(locationFilter, taskTypeFilter, sortByValue);
   };
+
+  const clearFilters = () => {
+    clearFilterFetch();
+  }
 
   // console.log(locationFilter);
   return (
@@ -60,6 +64,7 @@ const Dropdowns = ({ filterChoiceFetch }) => {
       <Button type="submit" onClick={filterSubmit}>
         Filter
       </Button>
+      <Button onClick={clearFilters}>Clear Filters</Button>
     </div>
   );
 };
