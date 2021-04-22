@@ -15,15 +15,11 @@
   height: 50px;
   padding: 0;
   width: calc(100% - 20px);
-  font-size: 1.3rem;
-  background-color: $accentLight;
-  span {
-    margin-left: 5px;
-  }
+  font-size: 1rem;
 }
 
 .filterTaskBtn:hover {
-  background-color: lighten($color: $accentLight, $amount: 5);
+  background-color: lighten($color: $midColor, $amount: 5);
 }
 
 .filterButtons {
