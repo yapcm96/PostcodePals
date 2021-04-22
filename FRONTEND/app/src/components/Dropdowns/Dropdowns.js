@@ -25,6 +25,7 @@ const Dropdowns = ({ filterChoiceFetch, clearFilterFetch }) => {
 
   const clearFilters = () => {
     clearFilterFetch();
+    
   }
 
   // console.log(locationFilter);
@@ -42,7 +43,6 @@ const Dropdowns = ({ filterChoiceFetch, clearFilterFetch }) => {
         <Dropdown
           options={["London", "Edinburgh", "Cardiff"]}
           label="Location"
-          s
           isOpen={openIndex === 1}
           onClick={() => openDropdown(1)}
           // this is built into all forms in HTML (and ours)
