@@ -10,7 +10,7 @@
   margin-bottom: 10px;
   @include mq("tablet") {
     width: 80%;
-    @include box(28%, auto, 5px, $lightColor);
+    @include box(29%, auto, 5px, $lightColor);
   }
   h3,
   h4 {
