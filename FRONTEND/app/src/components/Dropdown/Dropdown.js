@@ -35,7 +35,7 @@ const Dropdown = ({
   return (
     <div className={style.dropdownBtn} onClick={onClick}>
       <p className={style.label}>
-        {selected} <FaCaretDown />
+        {label === null ? selected : label} <FaCaretDown />
       </p>
 
       <div ref={ref} className={`${style.dropdown} ${isOpen && style.open}`}>

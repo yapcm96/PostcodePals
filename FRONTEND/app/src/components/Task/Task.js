@@ -1,6 +1,5 @@
 // import Button from "../Button/Button";
 import React, { useState, useEffect } from "react";
-
 import TaskPage from "../../pages/TaskPage";
 import { Link } from "react-router-dom";
 import style from "./task.module.scss";
@@ -15,7 +14,7 @@ const Task = ({ taskItem, index }) => {
       setShow(false);
     }
     setTimeout(() => setShow(true), 100);
-  }, []);
+  }, [taskItem]);
 
   return (
     <Link
