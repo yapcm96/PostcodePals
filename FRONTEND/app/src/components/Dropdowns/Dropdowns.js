@@ -6,10 +6,10 @@ import Button from "../Button/Button";
 const Dropdowns = ({ filterChoiceFetch, clearFilterFetch }) => {
   const [openIndex, setOpenIndex] = useState();
   // when location filter changes call back end with new filter:
-  const [locationFilter, setLocationFilter] = useState("Location");
-  const [taskTypeFilter, setTaskTypeFilter] = useState("Type");
-  const [sortByValue, setSortByValue] = useState("Sort by");
-  const [statusFilter, setStatusFilter] = useState("Assign");
+  const [locationFilter, setLocationFilter] = useState("");
+  const [taskTypeFilter, setTaskTypeFilter] = useState("");
+  const [sortByValue, setSortByValue] = useState("");
+  const [statusFilter, setStatusFilter] = useState("");
 
   const openDropdown = (index) => {
     if (index === openIndex) {
@@ -30,11 +30,12 @@ const Dropdowns = ({ filterChoiceFetch, clearFilterFetch }) => {
   };
 
   const clearFilters = () => {
-    setLocationFilter("Location");
-    setSortByValue("Sort by");
-    setStatusFilter("Assign");
-    setTaskTypeFilter("Type");
     clearFilterFetch();
+
+    setLocationFilter("");
+    setSortByValue("");
+    setStatusFilter("");
+    setTaskTypeFilter("");
   };
 
   return (
@@ -42,7 +43,7 @@ const Dropdowns = ({ filterChoiceFetch, clearFilterFetch }) => {
       <div className={style.dropdowns}>
         <Dropdown
           options={["Order Created", "Duration", "Task Setter"]}
-          label={sortByValue}
+          label={sortByValue === "" ? "Sort by" : null}
           isOpen={openIndex === 0}
           onClick={() => openDropdown(0)}
           setOpenIndex={setOpenIndex}
@@ -58,7 +59,7 @@ const Dropdowns = ({ filterChoiceFetch, clearFilterFetch }) => {
             "Edinburgh",
             "Cardiff",
           ]}
-          label={locationFilter}
+          label={locationFilter === "" ? "Location" : null}
           isOpen={openIndex === 1}
           setOpenIndex={setOpenIndex}
           onClick={() => openDropdown(1)}
@@ -75,7 +76,7 @@ const Dropdowns = ({ filterChoiceFetch, clearFilterFetch }) => {
             "Other",
           ]}
           setOpenIndex={setOpenIndex}
-          label={taskTypeFilter}
+          label={taskTypeFilter === "" ? "Type" : null}
           isOpen={openIndex === 2}
           onClick={() => openDropdown(2)}
           onChange={setTaskTypeFilter}
@@ -84,7 +85,7 @@ const Dropdowns = ({ filterChoiceFetch, clearFilterFetch }) => {
         <Dropdown
           options={["Any", "Not", "Assigned"]}
           setOpenIndex={setOpenIndex}
-          label={statusFilter}
+          label={statusFilter === "" ? "Assign" : null}
           isOpen={openIndex === 3}
           onClick={() => openDropdown(3)}
           onChange={setStatusFilter}
